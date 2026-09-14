@@ -1,10 +1,46 @@
 {
   "artboards": [
-    { "file": "Main.dc.html", "title": "Instagram post", "x": 0, "y": 0, "w": 1080, "h": 1080 },
-    { "file": "Story.dc.html", "title": "Instagram story", "x": 1180, "y": 0, "w": 1080, "h": 1920 },
-    { "file": "Flyer.dc.html", "title": "Print flyer (Letter)", "x": 2360, "y": 0, "w": 816, "h": 1056, "print": "fixed" },
-    { "file": "DirectionB.dc.html", "title": "Alternate: Quiet", "x": 0, "y": 2060, "w": 1080, "h": 1080 },
-    { "file": "DirectionC.dc.html", "title": "Alternate: Bold", "x": 1180, "y": 2060, "w": 1080, "h": 1080 }
+    {
+      "file": "Main.dc.html",
+      "title": "Instagram post",
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1080
+    },
+    {
+      "file": "Story.dc.html",
+      "title": "Instagram story",
+      "x": 1180,
+      "y": 0,
+      "w": 1080,
+      "h": 1920
+    },
+    {
+      "file": "Flyer.dc.html",
+      "title": "Print flyer (Letter)",
+      "x": 2360,
+      "y": 0,
+      "w": 816,
+      "h": 1056,
+      "print": "fixed"
+    },
+    {
+      "file": "DirectionB.dc.html",
+      "title": "Alternate: Quiet",
+      "x": 0,
+      "y": 2060,
+      "w": 1080,
+      "h": 1080
+    },
+    {
+      "file": "DirectionC.dc.html",
+      "title": "Alternate: Bold",
+      "x": 1180,
+      "y": 2060,
+      "w": 1080,
+      "h": 1080
+    }
   ],
   "annotations": [
     {
@@ -12,7 +48,7 @@
       "x": 0,
       "y": -232,
       "w": 620,
-      "text": "Renee Roy ad set.\nName, brokerage, office, phone and email are her real published details.\nStill to fill in: her Maine license number, her headshot, and a listing photo.\nMaine advertising rule: the brokerage trade name must stay prominent in every ad."
+      "text": "Renee Roy ad set, on Better Homes and Gardens Real Estate brand colors (Pantone 363, #339933).\nName, brokerage, office, phone and email are her real published details.\nStill to fill in: the official BHGRE logo from the brand kit, her Maine license number, her headshot, and a listing photo.\nMaine advertising rule: the brokerage trade name must stay prominent in every ad."
     },
     {
       "id": "alternates",
@@ -22,5 +58,7 @@
       "text": "Two other directions, same facts. Say which one you prefer and the story and flyer get rebuilt to match."
     }
   ],
-  "launch": { "view": "canvas" }
+  "launch": {
+    "view": "canvas"
+  }
 }

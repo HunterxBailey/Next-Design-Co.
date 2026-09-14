@@ -7,28 +7,33 @@
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Archivo:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&amp;family=Source+Sans+3:wght@400;500;600;700&amp;display=swap">
   <style>
-    body { margin: 0; font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif; }
-    a { color: #9C4A28; } a:hover { color: #7C3A1E; }
+    body { margin: 0; font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif; }
+    a { color: #24702A; } a:hover { color: #1B5620; }
   </style>
 </helmet>
-<div style="width: 1080px; height: 1920px; box-sizing: border-box; background: #F6F2EA; color: #1F1D1A; padding: 96px 88px 88px; display: flex; flex-direction: column; overflow: hidden;">
+<div style="width: 1080px; height: 1920px; box-sizing: border-box; background: #FFFFFF; color: #333333; padding: 96px 88px 80px; display: flex; flex-direction: column; overflow: hidden;">
 
-  <div style="display: flex; align-items: center; gap: 18px;">
-    <svg width="30" height="36" viewBox="0 0 20 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
-      <path d="M2.2 23V10.2a7.8 7.8 0 0 1 15.6 0V23"></path>
-      <path d="M10 23V10.2"></path>
-    </svg>
-    <span style="font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; color: {{accent}};">Renee&#39;s Realty Network</span>
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <svg width="30" height="36" viewBox="0 0 20 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+        <path d="M2.2 23V10.2a7.8 7.8 0 0 1 15.6 0V23"></path>
+        <path d="M10 23V10.2"></path>
+      </svg>
+      <span style="font-size: 22px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: {{accentDeep}};">Renee&#39;s Realty Network</span>
+    </div>
+    <div style="width: 186px; height: 58px; flex-shrink: 0; border: 1px dashed #C3CBC1; display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A9187;">[ BHGRE logo ]</span>
+    </div>
   </div>
 
-  <h1 style="margin: 44px 0 0; font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-weight: 400; font-size: 114px; line-height: 1.03; letter-spacing: -0.015em;">Thinking about<br>making a move<br>this year?</h1>
+  <h1 style="margin: 46px 0 0; font-family: Lora, Georgia, 'Times New Roman', serif; font-weight: 500; font-size: 96px; line-height: 1.08; letter-spacing: -0.015em;">Thinking about<br>making a move<br>this year?</h1>
 
-  <p style="margin: 32px 0 0; max-width: 830px; font-size: 30px; line-height: 1.5; color: #6B6459; text-wrap: pretty;">Let&#39;s start with a straight conversation about what your home is worth, or what you can buy. No pressure, no obligation.</p>
+  <p style="margin: 32px 0 0; max-width: 830px; font-size: 30px; line-height: 1.5; color: #5A6159; text-wrap: pretty;">Let&#39;s start with a straight conversation about what your home is worth, or what you can buy. No pressure, no obligation.</p>
 
-  <div style="margin-top: 44px; flex-grow: 1; min-height: 520px; border: 1px solid rgba(31, 29, 26, 0.2); background: rgba(31, 29, 26, 0.035); border-radius: 380px 380px 10px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 70px 48px 48px; box-sizing: border-box;">
-    <svg width="440" height="286" viewBox="0 0 400 260" fill="none" stroke="rgba(31,29,26,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <div style="margin-top: 44px; flex-grow: 1; flex-shrink: 1; min-height: 440px; border: 1px solid #DDE1DB; background: #F4F5F2; border-radius: 380px 380px 10px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 70px 48px 48px; box-sizing: border-box;">
+    <svg width="440" height="286" viewBox="0 0 400 260" fill="none" stroke="#A9B3A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M60 152 L95 118 L130 152"></path>
       <path d="M64 152 V190 H126 V152"></path>
       <path d="M110 140 V124 H118 V148"></path>
@@ -41,43 +46,50 @@
       <path d="M352 190 L360 166 L368 190"></path>
       <path d="M14 190 H386"></path>
       <path d="M14 216 C 110 202, 200 234, 386 212"></path>
-      <path d="M46 234 C 134 222, 224 250, 362 230" opacity="0.55"></path>
     </svg>
-    <span style="font-size: 19px; letter-spacing: 0.2em; text-transform: uppercase; color: #8A8378;">[ Drop in a listing photo ]</span>
+    <span style="font-size: 19px; letter-spacing: 0.18em; text-transform: uppercase; color: #8A9187;">[ Drop in a listing photo ]</span>
   </div>
 
-  <div style="margin-top: 44px; display: flex; align-items: center; gap: 30px;">
-    <div style="width: 118px; height: 142px; flex-shrink: 0; border: 1px solid rgba(31, 29, 26, 0.22); background: rgba(31, 29, 26, 0.04); border-radius: 59px 59px 5px 5px; display: flex; align-items: center; justify-content: center; padding-top: 14px; box-sizing: border-box;">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,29,26,0.4)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <div style="margin-top: 42px; flex-shrink: 0; display: flex; align-items: center; gap: 30px;">
+    <div style="width: 118px; height: 142px; flex-shrink: 0; border: 1px solid #DDE1DB; background: #F4F5F2; border-radius: 59px 59px 5px 5px; display: flex; align-items: center; justify-content: center; padding-top: 14px; box-sizing: border-box;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#A9B3A6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="9" r="3.6"></circle>
         <path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"></path>
       </svg>
     </div>
     <div style="display: flex; flex-direction: column; gap: 10px;">
-      <div style="font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-size: 62px; line-height: 1.02;">Renee Roy</div>
-      <div style="font-size: 22px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; color: {{accent}};">REALTOR&#174;</div>
-      <div style="font-size: 23px; line-height: 1.45; color: #6B6459;">Better Homes and Gardens Real Estate<br>The Masiello Group &#183; Auburn, Maine</div>
+      <div style="font-family: Lora, Georgia, 'Times New Roman', serif; font-weight: 500; font-size: 56px; line-height: 1.06;">Renee Roy</div>
+      <div style="font-size: 22px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: {{accentDeep}};">REALTOR&#174;</div>
+      <div style="font-size: 23px; line-height: 1.45; color: #5A6159;">Better Homes and Gardens Real Estate<br>The Masiello Group &#183; Auburn, Maine</div>
     </div>
   </div>
 
-  <div style="margin-top: 40px; background: #1F1D1A; color: #F6F2EA; padding: 30px 44px; display: flex; align-items: center; justify-content: center; gap: 22px;">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F6F2EA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+  <div style="margin-top: 38px; flex-shrink: 0; background: {{accentDeep}}; color: #FFFFFF; padding: 30px 44px; display: flex; align-items: center; justify-content: center; gap: 22px;">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
       <path d="M5.2 4.5h4l2 5-2.4 1.6a12 12 0 0 0 5.1 5.1l1.6-2.4 5 2v4a1.6 1.6 0 0 1-1.7 1.6A16.6 16.6 0 0 1 3.6 6.2 1.6 1.6 0 0 1 5.2 4.5z"></path>
     </svg>
-    <span style="font-size: 38px; font-weight: 600; letter-spacing: 0.01em;">Call or text (207) 782-8311</span>
+    <span style="font-size: 38px; font-weight: 700; letter-spacing: 0.01em;">Call or text (207) 782-8311</span>
   </div>
 
-  <div style="margin-top: 26px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
-    <span style="font-size: 18px; color: #8A8378;">reneesrealtynetwork.masiello.com</span>
-    <span style="font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A8378;">Maine Lic. [LICENSE #] &#183; Equal Housing Opportunity</span>
+  <div style="margin-top: 24px; flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+    <span style="font-size: 18px; color: #7A817A;">reneesrealtynetwork.masiello.com</span>
+    <span style="font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; color: #7A817A;">Maine Lic. [LICENSE #] &#183; Equal Housing Opportunity</span>
   </div>
 
 </div>
 </x-dc>
-<script data-dc-script data-props='{"accent":{"editor":"color","default":"#9C4A28","options":["#9C4A28","#3E4F52","#6B6B3A","#7A3B4E"]},"$preview":{"width":1080,"height":1920}}'>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#339933","options":["#339933","#2F7D32","#4A7C59","#33668F"]},"$preview":{"width":1080,"height":1920}}'>
 class Component extends DCLogic {
+  mix(hex, to, t) {
+    if (!/^#[0-9a-fA-F]{6}$/.test(hex || '')) return null;
+    const read = (h, i) => parseInt(h.slice(i, i + 2), 16);
+    const from = [read(hex, 1), read(hex, 3), read(hex, 5)];
+    const out = from.map((v, i) => Math.round(v + (to[i] - v) * t));
+    return '#' + out.map((v) => v.toString(16).padStart(2, '0')).join('');
+  }
   renderVals() {
-    return { accent: this.props.accent ?? '#9C4A28' };
+    const accent = this.props.accent ?? '#339933';
+    return { accent: accent, accentDeep: this.mix(accent, [0, 0, 0], 0.32) ?? '#24702A' };
   }
 }
 </script>
