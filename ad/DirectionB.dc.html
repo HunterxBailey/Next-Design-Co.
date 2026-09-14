@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&amp;family=Archivo:wght@400;500;600&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif; }
+    a { color: #9C4A28; } a:hover { color: #7C3A1E; }
+  </style>
+</helmet>
+<div style="width: 1080px; height: 1080px; box-sizing: border-box; background: #FBF9F4; color: #1F1D1A; padding: 100px; display: flex; flex-direction: column; align-items: center; text-align: center; overflow: hidden;">
+
+  <svg width="30" height="36" viewBox="0 0 20 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.2 23V10.2a7.8 7.8 0 0 1 15.6 0V23"></path>
+    <path d="M10 23V10.2"></path>
+  </svg>
+
+  <div style="margin-top: 34px; font-size: 17px; letter-spacing: 0.34em; text-transform: uppercase; color: #8A8378;">Renee&#39;s Realty Network</div>
+
+  <div style="flex-grow: 1; min-height: 40px;"></div>
+
+  <div style="font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-weight: 400; font-size: 132px; line-height: 1.0; letter-spacing: -0.02em;">Renee Roy</div>
+
+  <div style="margin-top: 26px; font-size: 20px; letter-spacing: 0.26em; text-transform: uppercase; color: {{accent}};">REALTOR&#174; &#183; Auburn, Maine</div>
+
+  <div style="margin-top: 40px; width: 86px; height: 1px; background: rgba(31, 29, 26, 0.3);"></div>
+
+  <p style="margin: 40px 0 0; max-width: 700px; font-size: 25px; line-height: 1.6; color: #6B6459; text-wrap: pretty;">Buying or selling anywhere in Maine, with a team that works at it full time and can show you any property on the market.</p>
+
+  <div style="flex-grow: 1; min-height: 40px;"></div>
+
+  <div style="font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-size: 52px; line-height: 1.1;">(207) 782-8311</div>
+  <div style="margin-top: 14px; font-size: 22px; color: #6B6459;">reneeroy@masiello.com</div>
+
+  <div style="margin-top: 44px; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: #8A8378; line-height: 1.7;">Better Homes and Gardens Real Estate The Masiello Group<br>Maine Lic. [LICENSE #] &#183; Equal Housing Opportunity</div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#9C4A28","options":["#9C4A28","#3E4F52","#6B6B3A","#7A3B4E"]},"$preview":{"width":1080,"height":1080}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#9C4A28' };
+  }
+}
+</script>
+</body>
+</html>

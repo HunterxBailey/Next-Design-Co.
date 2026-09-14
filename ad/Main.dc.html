@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Archivo:wght@400;500;600;700&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif; }
+    a { color: #9C4A28; } a:hover { color: #7C3A1E; }
+  </style>
+</helmet>
+<div style="width: 1080px; height: 1080px; box-sizing: border-box; background: #F6F2EA; color: #1F1D1A; display: flex; flex-direction: column; overflow: hidden;">
+
+  <div style="display: flex; flex-direction: column; flex-grow: 1; padding: 72px 72px 0;">
+
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <svg width="26" height="31" viewBox="0 0 20 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+        <path d="M2.2 23V10.2a7.8 7.8 0 0 1 15.6 0V23"></path>
+        <path d="M10 23V10.2"></path>
+      </svg>
+      <span style="font-size: 19px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; color: {{accent}};">Auburn &#183; Lewiston &#183; All of Maine</span>
+    </div>
+
+    <h1 style="margin: 38px 0 0; font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-weight: 400; font-size: 100px; line-height: 1.03; letter-spacing: -0.015em; color: #1F1D1A;">Any listing in Maine.<br>One team you trust.</h1>
+
+    <p style="margin: 30px 0 0; max-width: 780px; font-size: 26px; line-height: 1.52; color: #6B6459; text-wrap: pretty;">We can show you any property on the market, not only our own listings. Full-time buyer and seller representation from an Auburn office that knows these streets.</p>
+
+    <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 8px;">
+      <div style="height: 3px; width: 148px; background: {{accent}};"></div>
+      <div style="height: 1px; width: 100%; background: rgba(31, 29, 26, 0.16);"></div>
+    </div>
+
+    <div style="flex-grow: 1; min-height: 28px;"></div>
+  </div>
+
+  <div style="background: #1F1D1A; color: #F6F2EA; padding: 52px 72px; display: flex; align-items: center; gap: 40px;">
+
+    <div style="width: 172px; height: 206px; flex-shrink: 0; border: 1px solid rgba(246, 242, 234, 0.3); background: rgba(246, 242, 234, 0.05); border-radius: 86px 86px 5px 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding-top: 18px; box-sizing: border-box;">
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="rgba(246,242,234,0.45)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="9" r="3.6"></circle>
+        <path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"></path>
+      </svg>
+      <span style="font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: #A69E91; text-align: center;">[ Headshot ]</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 13px; flex-grow: 1;">
+      <div style="font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-size: 58px; line-height: 1.02; color: #F6F2EA;">Renee Roy</div>
+      <div style="font-size: 20px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; color: {{accentLight}};">REALTOR&#174; &#183; Renee&#39;s Realty Network</div>
+      <div style="font-size: 21px; line-height: 1.5; color: #A69E91;">Better Homes and Gardens Real Estate The Masiello Group<br>155 Center Street, Auburn, Maine 04210</div>
+      <div style="display: flex; align-items: center; gap: 22px; margin-top: 5px; flex-wrap: wrap;">
+        <span style="font-size: 27px; font-weight: 600; color: #F6F2EA;">(207) 782-8311</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #6B6459;"></span>
+        <span style="font-size: 23px; color: #F6F2EA;">reneeroy@masiello.com</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#9C4A28","options":["#9C4A28","#3E4F52","#6B6B3A","#7A3B4E"]},"$preview":{"width":1080,"height":1080}}'>
+class Component extends DCLogic {
+  lighten(hex, t) {
+    if (!/^#[0-9a-fA-F]{6}$/.test(hex || '')) return '#D98A63';
+    const read = (h, i) => parseInt(h.slice(i, i + 2), 16);
+    const to = [246, 242, 234];
+    const from = [read(hex, 1), read(hex, 3), read(hex, 5)];
+    const out = from.map((v, i) => Math.round(v + (to[i] - v) * t));
+    return '#' + out.map((v) => v.toString(16).padStart(2, '0')).join('');
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#9C4A28';
+    return { accent: accent, accentLight: this.lighten(accent, 0.46) };
+  }
+}
+</script>
+</body>
+</html>

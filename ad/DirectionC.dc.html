@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif; }
+    a { color: #D98A63; } a:hover { color: #E8A582; }
+  </style>
+</helmet>
+<div style="width: 1080px; height: 1080px; box-sizing: border-box; background: #1F1D1A; color: #F6F2EA; padding: 72px; display: flex; flex-direction: column; overflow: hidden;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+    <span style="font-size: 19px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; color: {{accentLight}};">Renee&#39;s Realty Network</span>
+    <span style="font-size: 19px; letter-spacing: 0.18em; text-transform: uppercase; color: #8A8378;">Auburn, Maine</span>
+  </div>
+
+  <h1 style="margin: 46px 0 0; font-size: 122px; font-weight: 800; line-height: 0.96; letter-spacing: -0.035em; text-transform: uppercase; color: #F6F2EA;">Any house<br>in Maine.<br><span style="color: {{accentLight}};">One team.</span></h1>
+
+  <div style="flex-grow: 1; min-height: 40px;"></div>
+
+  <div style="background: {{accent}}; color: #FFF6EF; padding: 34px 44px; display: flex; align-items: center; justify-content: space-between; gap: 28px;">
+    <span style="font-size: 27px; font-weight: 600; letter-spacing: 0.02em;">Call or text</span>
+    <span style="font-size: 52px; font-weight: 800; letter-spacing: -0.02em;">(207) 782-8311</span>
+  </div>
+
+  <div style="margin-top: 34px; display: flex; align-items: flex-end; justify-content: space-between; gap: 30px;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-size: 46px; font-weight: 700; letter-spacing: -0.02em;">Renee Roy, REALTOR&#174;</div>
+      <div style="font-size: 21px; line-height: 1.45; color: #A69E91;">Better Homes and Gardens Real Estate<br>The Masiello Group &#183; 155 Center Street, Auburn</div>
+    </div>
+    <div style="text-align: right; font-size: 18px; line-height: 1.6; color: #A69E91;">reneeroy@masiello.com<br>Maine Lic. [LICENSE #]<br>Equal Housing Opportunity</div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#9C4A28","options":["#9C4A28","#3E4F52","#6B6B3A","#7A3B4E"]},"$preview":{"width":1080,"height":1080}}'>
+class Component extends DCLogic {
+  lighten(hex, t) {
+    if (!/^#[0-9a-fA-F]{6}$/.test(hex || '')) return '#D98A63';
+    const read = (h, i) => parseInt(h.slice(i, i + 2), 16);
+    const to = [246, 242, 234];
+    const from = [read(hex, 1), read(hex, 3), read(hex, 5)];
+    const out = from.map((v, i) => Math.round(v + (to[i] - v) * t));
+    return '#' + out.map((v) => v.toString(16).padStart(2, '0')).join('');
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#9C4A28';
+    return { accent: accent, accentLight: this.lighten(accent, 0.5) };
+  }
+}
+</script>
+</body>
+</html>
