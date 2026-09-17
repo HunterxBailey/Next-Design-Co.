@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,500&amp;family=Source+Sans+3:wght@400;500;600;700;900&amp;display=swap">
+  <style>
+    body { margin: 0; font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif; }
+    a { color: #24702A; } a:hover { color: #1B5620; }
+  </style>
+</helmet>
+<div style="width: 1080px; height: 1080px; box-sizing: border-box; position: relative; background: {{accentDeep}}; padding: 56px; overflow: hidden; display: flex;">
+
+  <div style="position: absolute; inset: 0; color: {{patternInk}}; opacity: 0.3; pointer-events: none;"><svg width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true" style="display:block;width:100%;height:100%;"><defs><pattern id="bhgwall" patternUnits="userSpaceOnUse" width="180" height="180"><g fill="currentColor" fill-opacity="0.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M90 48 C 96 72, 96 108, 90 132" fill="none"/><path d="M90 66 C 79 63, 72 54, 71 44 C 82 46, 89 55, 90 66Z"/><path d="M90 88 C 79 85, 72 76, 71 66 C 82 68, 89 77, 90 88Z"/><path d="M90 110 C 79 107, 72 98, 71 88 C 82 90, 89 99, 90 110Z"/><path d="M90 77 C 101 74, 108 65, 109 55 C 98 57, 91 66, 90 77Z"/><path d="M90 99 C 101 96, 108 87, 109 77 C 98 79, 91 88, 90 99Z"/><path d="M90 121 C 101 118, 108 109, 109 99 C 98 101, 91 110, 90 121Z"/><path d="M0 90 C 10 86, 18 76, 19 66 C 8 68, 1 78, 0 90Z"/><path d="M180 90 C 170 86, 162 76, 161 66 C 172 68, 179 78, 180 90Z"/></g><g fill="currentColor" fill-opacity="0.42" stroke="currentColor" stroke-width="1.7"><circle cx="0.00" cy="-9.00" r="5.6"/><circle cx="-8.56" cy="-2.78" r="5.6"/><circle cx="-5.29" cy="7.28" r="5.6"/><circle cx="5.29" cy="7.28" r="5.6"/><circle cx="8.56" cy="-2.78" r="5.6"/><circle cx="0.00" cy="0.00" r="3.1" fill-opacity="0.85"/><circle cx="180.00" cy="-9.00" r="5.6"/><circle cx="171.44" cy="-2.78" r="5.6"/><circle cx="174.71" cy="7.28" r="5.6"/><circle cx="185.29" cy="7.28" r="5.6"/><circle cx="188.56" cy="-2.78" r="5.6"/><circle cx="180.00" cy="0.00" r="3.1" fill-opacity="0.85"/><circle cx="0.00" cy="171.00" r="5.6"/><circle cx="-8.56" cy="177.22" r="5.6"/><circle cx="-5.29" cy="187.28" r="5.6"/><circle cx="5.29" cy="187.28" r="5.6"/><circle cx="8.56" cy="177.22" r="5.6"/><circle cx="0.00" cy="180.00" r="3.1" fill-opacity="0.85"/><circle cx="180.00" cy="171.00" r="5.6"/><circle cx="171.44" cy="177.22" r="5.6"/><circle cx="174.71" cy="187.28" r="5.6"/><circle cx="185.29" cy="187.28" r="5.6"/><circle cx="188.56" cy="177.22" r="5.6"/><circle cx="180.00" cy="180.00" r="3.1" fill-opacity="0.85"/></g></pattern></defs><rect width="100%" height="100%" fill="url(#bhgwall)"/></svg></div>
+
+  <div style="position: relative; z-index: 1; flex-grow: 1; background: #FFFFFF; border-radius: 4px; box-shadow: 0 18px 50px rgba(0,0,0,0.2); padding: 58px 64px; display: flex; flex-direction: column; overflow: hidden;">
+
+    <div style="flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+      <span style="font-size: 17px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: {{accentDeep}};">What clients say</span>
+      <div style="width: 162px; height: 48px; flex-shrink: 0; border: 1px dashed #C3CBC1; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A9187;">[ BHGRE logo ]</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 34px; flex-shrink: 0; display: flex; align-items: center; gap: 10px;">
+      <svg width="240" height="44" viewBox="0 0 240 44" fill="{{accent}}" aria-hidden="true">
+        <path d="M22 6 26.9 16.9 38.4 18.2 29.8 26.1 32.2 37.6 22 31.8 11.8 37.6 14.2 26.1 5.6 18.2 17.1 16.9Z"></path>
+        <path d="M70 6 74.9 16.9 86.4 18.2 77.8 26.1 80.2 37.6 70 31.8 59.8 37.6 62.2 26.1 53.6 18.2 65.1 16.9Z"></path>
+        <path d="M118 6 122.9 16.9 134.4 18.2 125.8 26.1 128.2 37.6 118 31.8 107.8 37.6 110.2 26.1 101.6 18.2 113.1 16.9Z"></path>
+        <path d="M166 6 170.9 16.9 182.4 18.2 173.8 26.1 176.2 37.6 166 31.8 155.8 37.6 158.2 26.1 149.6 18.2 161.1 16.9Z"></path>
+        <path d="M214 6 218.9 16.9 230.4 18.2 221.8 26.1 224.2 37.6 214 31.8 203.8 37.6 206.2 26.1 197.6 18.2 209.1 16.9Z"></path>
+      </svg>
+    </div>
+
+    <div style="margin-top: 30px; flex-grow: 1; flex-shrink: 1; min-height: 100px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="font-family: Lora, Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400; font-size: 54px; line-height: 1.26; color: #262A26; text-wrap: pretty;">&#8220;[Paste a client review here. Two or three sentences is plenty, and the shorter it is the more people will read it.]&#8221;</div>
+    </div>
+
+    <div style="margin-top: 26px; flex-shrink: 0; display: flex; align-items: center; gap: 18px;">
+      <div style="width: 52px; height: 3px; background: {{accent}}; flex-shrink: 0;"></div>
+      <span style="font-size: 26px; font-weight: 700; color: #5A6159;">[CLIENT NAME], [TOWN], Maine</span>
+    </div>
+
+    <div style="margin-top: 30px; flex-shrink: 0; background: {{accentDeep}}; color: #FFFFFF; padding: 24px 34px; display: flex; align-items: center; justify-content: space-between; gap: 22px;">
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-size: 29px; font-weight: 700;">Renee Roy, REALTOR&#174;</span>
+        <span style="font-size: 17px; font-weight: 600; color: {{accentSoft}};">Better Homes and Gardens Real Estate The Masiello Group</span>
+      </div>
+      <span style="font-size: 38px; font-weight: 900; white-space: nowrap;">(207) 782-8311</span>
+    </div>
+
+    <div style="margin-top: 18px; flex-shrink: 0; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: #8A9187;">155 Center Street, Auburn &#183; Maine Lic. [LICENSE #] &#183; Equal Housing Opportunity</div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#339933","options":["#339933","#2F7D32","#4A7C59","#33668F"]},"$preview":{"width":1080,"height":1080}}'>
+class Component extends DCLogic {
+  mix(hex, to, t) {
+    if (!/^#[0-9a-fA-F]{6}$/.test(hex || '')) return null;
+    const read = (h, i) => parseInt(h.slice(i, i + 2), 16);
+    const from = [read(hex, 1), read(hex, 3), read(hex, 5)];
+    const out = from.map((v, i) => Math.round(v + (to[i] - v) * t));
+    return '#' + out.map((v) => v.toString(16).padStart(2, '0')).join('');
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#339933';
+    return {
+      accent: accent,
+      accentDeep: this.mix(accent, [0, 0, 0], 0.36) ?? '#216221',
+      accentSoft: this.mix(accent, [255, 255, 255], 0.62) ?? '#B3E0B3',
+      patternInk: this.mix(accent, [255, 255, 255], 0.8) ?? '#D6EED6'
+    };
+  }
+}
+</script>
+</body>
+</html>

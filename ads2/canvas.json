@@ -1,0 +1,27 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Home value ad (post)", "x": 0, "y": 0, "w": 1080, "h": 1080 },
+    { "file": "JustListed.dc.html", "title": "Just Listed (post)", "x": 1180, "y": 0, "w": 1080, "h": 1080 },
+    { "file": "OpenHouse.dc.html", "title": "Open House (post)", "x": 2360, "y": 0, "w": 1080, "h": 1080 },
+    { "file": "Story.dc.html", "title": "Home value (story)", "x": 3540, "y": 0, "w": 1080, "h": 1920 },
+    { "file": "Testimonial.dc.html", "title": "Client review (post)", "x": 0, "y": 2060, "w": 1080, "h": 1080 },
+    { "file": "Flyer.dc.html", "title": "Print flyer (Letter)", "x": 1180, "y": 2060, "w": 816, "h": 1056, "print": "fixed" }
+  ],
+  "annotations": [
+    {
+      "id": "brief",
+      "x": 0,
+      "y": -268,
+      "w": 700,
+      "text": "Renee Roy ad kit. Botanical wallpaper ground in the Better Homes and Gardens green (Pantone 363, #339933), with a white card on top so the message stays loud.\nHer name, brokerage, office, phone and email are real. Everything in [BRACKETS] is a fill-in: listing details, dates, prices, the review, her licence number, the BHGRE logo, and photos.\nThe accent swatch above each artboard recolours the wallpaper, the badges and the call bars together."
+    },
+    {
+      "id": "reuse",
+      "x": 0,
+      "y": 1880,
+      "w": 700,
+      "text": "Just Listed and Open House are meant to be reused. Duplicate the artboard for each property, swap the photo and the bracketed fields, and export."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}
