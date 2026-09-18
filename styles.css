@@ -1278,3 +1278,123 @@ a { color: inherit; }
   }
   [data-reveal] { opacity: 1; transform: none; }
 }
+
+/* ========================================================================
+   3D CANVAS + LOADER + INTERACTIVE ADDITIONS
+   ======================================================================== */
+#three-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+  opacity: 0.85;
+  mix-blend-mode: normal;
+}
+
+/* Hero must sit above the fixed canvas but transparent enough to see it */
+.hero { background: transparent; }
+.hero-bg {
+  background:
+    radial-gradient(circle at 78% 32%, rgba(35,197,82,0.18) 0%, transparent 55%),
+    radial-gradient(circle at 15% 85%, rgba(35,197,82,0.10) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(19,21,19,0.9) 0%, rgba(14,16,14,0.75) 55%, rgba(18,19,18,0.95) 100%);
+}
+
+/* Sections beyond the hero cover the fixed canvas cleanly */
+.strip, .services, .fall, .about, .pricing, .contact, .footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Wrap hero content above canvas */
+#nav { z-index: 100; }
+.hero-inner { z-index: 3; }
+.scroll-hint { z-index: 4; }
+
+/* Ambient glow on the logo card while the 3D scene shows behind */
+.hero-logo-wrap {
+  background: linear-gradient(160deg, rgba(26,28,26,0.85), rgba(14,16,14,0.85));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ---------- Loader ---------- */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: #0a0b0a;
+  transition: opacity .6s ease, visibility .6s ease;
+}
+#loader.done { opacity: 0; visibility: hidden; }
+
+.loader-ring {
+  width: 72px; height: 72px;
+  position: relative;
+  margin-bottom: 22px;
+}
+.loader-ring span {
+  position: absolute;
+  inset: 0;
+  border: 3px solid transparent;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: loaderSpin 1.1s linear infinite;
+}
+.loader-ring span:nth-child(2) {
+  inset: 8px;
+  border-top-color: transparent;
+  border-right-color: var(--green);
+  animation-duration: 1.6s;
+  animation-direction: reverse;
+}
+.loader-ring span:nth-child(3) {
+  inset: 18px;
+  border-top-color: transparent;
+  border-bottom-color: var(--green);
+  animation-duration: 2s;
+}
+@keyframes loaderSpin { to { transform: rotate(360deg); } }
+
+.loader-text {
+  font-family: var(--sans);
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--muted-2);
+  margin: 0;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+}
+.loader-text .accent { color: var(--green); }
+.loader-text::after {
+  content: "Loading the yard…";
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--muted);
+}
+
+/* ---------- 3D tilt cards - shared prep ---------- */
+.service-card, .price-card, .fall-card, .business-card, .hero-logo-wrap {
+  transform-style: preserve-3d;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease, background .35s ease;
+}
+.service-card h3, .price-name, .fall-card-title {
+  transform: translateZ(20px);
+}
+.service-icon { transform: translateZ(30px); }
+
+/* Btn transitions relaxed for magnetic effect */
+.btn { transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .18s ease; }
+
+/* Reduce 3D canvas load on small screens */
+@media (max-width: 720px) {
+  #three-canvas { opacity: 0.55; }
+}
