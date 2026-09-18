@@ -3,277 +3,448 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MW.P1CS — Myles Walker Photography</title>
-  <meta name="description" content="MW.P1CS — Freelance sports and event photography by Myles Walker. Based in Lewiston, Maine." />
+  <title>North Scape Services — Leaf Cleanup & Yard Services · Auburn, Maine</title>
+  <meta name="description" content="North Scape Services — Leaf cleanup, lawn care, and gutter clearing in Auburn, Maine. Owned and operated by Chance Perreault. Expect Excellence." />
+  <meta name="theme-color" content="#121312" />
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
 </head>
 <body>
-  <!-- Loading overlay -->
-  <div id="loader">
-    <div class="loader-inner">
-      <div class="aperture">
-        <span></span><span></span><span></span>
-        <span></span><span></span><span></span>
-      </div>
-      <p class="loading-text">LOADING MW.P1CS</p>
+
+  <!-- Loader -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-ring">
+      <span></span><span></span><span></span>
     </div>
+    <p class="loader-text">NORTH<span class="accent">SCAPE</span> · SERVICES</p>
   </div>
 
-  <!-- Cursor -->
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+  <!-- 3D Canvas (hero background) -->
+  <canvas id="three-canvas" aria-hidden="true"></canvas>
 
-  <!-- Navigation -->
-  <nav id="nav">
-    <div class="nav-brand">
-      <span class="brand-mark">MW</span><span class="brand-dot">.</span><span class="brand-p1cs">P1CS</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#home" class="nav-link">Home</a></li>
-      <li><a href="#work" class="nav-link">Work</a></li>
-      <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="#services" class="nav-link">Services</a></li>
-      <li><a href="#contact" class="nav-link">Book</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+  <!-- Nav -->
+  <header id="nav">
+    <a href="#home" class="brand" aria-label="North Scape Services home">
+      <img src="assets/logo.jpg" alt="North Scape Services logo" class="brand-logo" />
+      <span class="brand-text">
+        <span class="brand-line1">North<span class="accent">Scape</span></span>
+        <span class="brand-line2">Expect Excellence</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#fall">Fall Cleanup</a>
+      <a href="#about">About</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-  </nav>
-
-  <!-- 3D Canvas -->
-  <canvas id="three-canvas"></canvas>
+  </header>
 
   <!-- HERO -->
-  <section id="home" class="section hero">
-    <div class="hero-content">
-      <p class="eyebrow">FREELANCE PHOTOGRAPHER · LEWISTON, MAINE</p>
-      <h1 class="hero-title">
-        <span class="line"><span class="reveal">Frozen</span></span>
-        <span class="line"><span class="reveal">Moments,</span></span>
-        <span class="line accent"><span class="reveal">Loud Stories.</span></span>
-      </h1>
-      <p class="hero-sub">
-        Sports, schools, and everything in between — captured by Myles Walker.
-      </p>
-      <div class="hero-ctas">
-        <a href="#work" class="btn btn-primary" data-hover>See the Work</a>
-        <a href="#contact" class="btn btn-ghost" data-hover>Book a Shoot</a>
+  <section id="home" class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="leaves" id="leaves"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal>Auburn, Maine · (207) 402-4203</p>
+        <h1 class="hero-title" data-reveal>
+          Sharp lawns.<br/>
+          <span class="hero-accent">Clean yards.</span><br/>
+          <span class="hero-strike">Expect Excellence.</span>
+        </h1>
+        <p class="hero-lede" data-reveal>
+          North Scape Services is a landscaping and fall cleanup crew based in
+          Auburn. Owned and operated by Chance Perreault — honest work, fair
+          prices, and yards that look like someone actually cared.
+        </p>
+        <div class="hero-cta" data-reveal>
+          <a href="#contact" class="btn btn-primary">Get a free quote</a>
+          <a href="#services" class="btn btn-ghost">What we do →</a>
+        </div>
+
+        <div class="hero-meta" data-reveal>
+          <div class="meta-item">
+            <span class="meta-num"><span class="accent" data-count="7">0</span>+</span>
+            <span class="meta-label">Services</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-num">Free</span>
+            <span class="meta-label">Estimates</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-num"><span class="accent" data-count="207">0</span></span>
+            <span class="meta-label">Local Maine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal>
+        <div class="hero-logo-wrap">
+          <img src="assets/logo.jpg" alt="North Scape Services — logo with mower, leaf blower, and grass" />
+        </div>
+        <div class="hero-tagline">Expect Excellence</div>
       </div>
     </div>
-    <div class="scroll-cue">
-      <span>SCROLL</span>
-      <div class="scroll-line"></div>
-    </div>
+
+    <a href="#services" class="scroll-hint" aria-label="Scroll down">
+      <span></span>
+    </a>
   </section>
 
-  <!-- MARQUEE -->
-  <section class="marquee">
-    <div class="marquee-track">
-      <span>SPORTS ·</span><span>EVENTS ·</span><span>SCHOOLS ·</span><span>ACTION ·</span><span>PORTRAITS ·</span>
-      <span>SPORTS ·</span><span>EVENTS ·</span><span>SCHOOLS ·</span><span>ACTION ·</span><span>PORTRAITS ·</span>
-      <span>SPORTS ·</span><span>EVENTS ·</span><span>SCHOOLS ·</span><span>ACTION ·</span><span>PORTRAITS ·</span>
-    </div>
-  </section>
+  <!-- Excellence strip -->
+  <div class="strip" aria-hidden="true">
+    <span>Lawn Care</span><span class="dot"></span>
+    <span>Leaf Disposal</span><span class="dot"></span>
+    <span>Gutters</span><span class="dot"></span>
+    <span>Fall Cleanup</span><span class="dot"></span>
+    <span>Auburn, Maine</span>
+  </div>
 
-  <!-- WORK / GALLERY -->
-  <section id="work" class="section work">
+  <!-- SERVICES -->
+  <section id="services" class="section services">
     <div class="section-head">
-      <p class="section-num">01 / WORK</p>
-      <h2 class="section-title">The <em>Portfolio</em></h2>
-      <p class="section-lede">
-        Sideline energy, hallway rivalries, Friday-night lights. A rolling reel from Lewiston and beyond.
+      <p class="eyebrow" data-reveal>Services</p>
+      <h2 class="section-title" data-reveal>Everything your yard needs, <em>one crew.</em></h2>
+      <p class="section-lede" data-reveal>
+        From weekly mowing to a full end-of-season cleanup, we handle the work
+        that keeps a property looking cared for through every Maine season.
       </p>
     </div>
 
-    <div class="filter-bar">
-      <button class="filter active" data-filter="all">All</button>
-      <button class="filter" data-filter="sports">Sports</button>
-      <button class="filter" data-filter="events">Events</button>
-      <button class="filter" data-filter="schools">Schools</button>
-      <button class="filter" data-filter="portraits">Portraits</button>
-    </div>
+    <div class="service-grid">
+      <article class="service-card" data-reveal>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M6 34 L12 22 L18 30 L26 14 L34 26 L42 20 L42 38 L6 38 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Lawn Care</h3>
+        <p>Weekly or bi-weekly mowing, clean edges, walks blown off. Sharp, striped, done right.</p>
+      </article>
 
-    <div class="gallery" id="gallery">
-      <!-- Cards injected here by JS -->
+      <article class="service-card featured" data-reveal>
+        <div class="service-badge">Season</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 6 C18 14 14 20 14 26 C14 32 18 36 24 36 C30 36 34 32 34 26 C34 20 30 14 24 6 Z M24 36 L24 42" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Leaf Disposal</h3>
+        <p>Full-yard leaf removal, hauled away or mulched down. One-time or recurring through the season — pick what fits.</p>
+      </article>
+
+      <article class="service-card" data-reveal>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M8 20 L24 8 L40 20 L40 40 L8 40 Z M18 40 L18 28 L30 28 L30 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Gutters</h3>
+        <p>Clear out packed leaves and debris before the freeze so water goes where it should — not into your basement.</p>
+      </article>
+
+      <article class="service-card" data-reveal>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M6 38 L14 22 L22 32 L30 18 L42 38 Z M14 22 L14 10 M30 18 L30 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Hedge & Shrub Trimming</h3>
+        <p>Shaped, tidy, and even. We clean up the clippings and leave the beds looking finished.</p>
+      </article>
+
+      <article class="service-card" data-reveal>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M6 34 L42 34 M10 34 C10 24 16 20 24 20 C32 20 38 24 38 34 M24 20 L24 10 M20 14 L24 10 L28 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Mulching & Beds</h3>
+        <p>Fresh mulch, sharp bed edges, weeds pulled. The kind of curb appeal that gets noticed from the road.</p>
+      </article>
+
+      <article class="service-card" data-reveal>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M8 30 L20 18 L28 26 L40 14 M28 14 L40 14 L40 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 38 L40 38" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Yard Debris Removal</h3>
+        <p>Storm cleanup, brush piles, downed limbs — hauled off and gone. Reclaim your Saturday.</p>
+      </article>
+
+      <article class="service-card" data-reveal>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 8 L24 40 M12 12 L36 36 M12 36 L36 12 M8 24 L40 24 M18 8 L24 14 L30 8 M18 40 L24 34 L30 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Driveway & Walk Blow-Off</h3>
+        <p>Add-on to any service — walks, decks, and drives blown clear so the finished job actually looks finished.</p>
+      </article>
+
+      <article class="service-card ghost" data-reveal>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 8 V40 M8 24 H40 M14 14 L34 34 M14 34 L34 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Snow Removal</h3>
+        <p class="coming">Coming winter 2026 — reserve your spot early. Residential driveways and walks in the Auburn area.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- FALL FEATURE -->
+  <section id="fall" class="fall">
+    <div class="fall-inner">
+      <div class="fall-copy">
+        <p class="eyebrow" data-reveal>Right Now · Fall 2026</p>
+        <h2 class="section-title" data-reveal>Book your <em>fall cleanup</em> before the first frost.</h2>
+        <p class="section-lede" data-reveal>
+          Leaves don't wait, and neither should you. A full fall cleanup means
+          less matting, healthier grass in spring, and a lot fewer weekends
+          spent behind a rake.
+        </p>
+        <ul class="fall-list" data-reveal>
+          <li><span>1</span>Full-property leaf removal — front, back, beds, corners.</li>
+          <li><span>2</span>Final mow at winter height so grass overwinters well.</li>
+          <li><span>3</span>Gutters cleared and rinsed to prevent ice dams.</li>
+          <li><span>4</span>Beds cut back and edges cleaned for a tidy finish.</li>
+          <li><span>5</span>All debris hauled off — nothing left behind.</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" data-reveal>Reserve my cleanup</a>
+      </div>
+      <aside class="fall-card" data-reveal>
+        <div class="fall-card-header">
+          <span class="pulse"></span>
+          <span>Booking now</span>
+        </div>
+        <p class="fall-card-title">Fall Cleanup Package</p>
+        <p class="fall-card-price">
+          <span class="from">Starting at</span>
+          <span class="amount">$185</span>
+          <span class="per">/ typical residential lot</span>
+        </p>
+        <ul>
+          <li>Leaf removal, hauled away</li>
+          <li>Final seasonal mow</li>
+          <li>Bed cleanup + edging</li>
+          <li>Walkways blown clear</li>
+        </ul>
+        <p class="fall-card-note">Every yard is different — free on-site estimates within the Auburn / Lewiston area.</p>
+      </aside>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section id="about" class="section about">
     <div class="about-grid">
-      <div class="about-visual">
-        <div class="about-card">
-          <div class="polaroid">
-            <div class="polaroid-photo" id="polaroidPhoto"></div>
-            <p class="polaroid-caption">Myles · Lewiston, ME</p>
+      <div class="about-copy">
+        <p class="eyebrow" data-reveal>About</p>
+        <h2 class="section-title" data-reveal>Hi — I'm <em>Chance.</em></h2>
+        <p class="about-lede" data-reveal>
+          I'm eighteen, born and raised in Maine, and I started North Scape
+          Services because I like working outside and I like doing a job the
+          right way. This isn't a side hustle for gas money. It's a real
+          business, and every yard I take on gets treated like it matters —
+          because it does.
+        </p>
+        <p data-reveal>
+          I show up when I say I will. I clean up after myself. I don't cut
+          corners just because nobody's watching. If you want that, I'd love
+          to work for you.
+        </p>
+        <div class="about-values" data-reveal>
+          <div class="value">
+            <strong>On time.</strong>
+            <span>Text updates before I show up. No mystery arrivals.</span>
+          </div>
+          <div class="value">
+            <strong>Fair price.</strong>
+            <span>Free quotes up front. What we agree on is what you pay.</span>
+          </div>
+          <div class="value">
+            <strong>Clean finish.</strong>
+            <span>Walks blown off, gates closed, nothing left behind.</span>
           </div>
         </div>
       </div>
-      <div class="about-copy">
-        <p class="section-num">02 / ABOUT</p>
-        <h2 class="section-title">Behind the <em>Lens</em></h2>
-        <p class="about-para">
-          I'm <strong>Myles Walker</strong>, a freelance photographer from
-          <strong>Lewiston, Maine</strong>. When I'm not on the sideline of a Friday-night
-          game, I'm a junior in high school running <strong>MW.P1CS</strong> — my
-          freelance studio built for the athletes, students, and events that make our
-          community loud.
-        </p>
-        <p class="about-para">
-          I shoot fast, I shoot honest, and I deliver on time. Whether it's varsity
-          basketball at LHS, a school production, or a local tournament, my job is
-          simple: give you photos worth posting, printing, and remembering.
-        </p>
-        <ul class="stats">
-          <li>
-            <span class="stat-num" data-count="200">0</span>+
-            <span class="stat-label">Games Shot</span>
-          </li>
-          <li>
-            <span class="stat-num" data-count="15">0</span>+
-            <span class="stat-label">Schools Covered</span>
-          </li>
-          <li>
-            <span class="stat-num" data-count="10000">0</span>+
-            <span class="stat-label">Frames Delivered</span>
-          </li>
-        </ul>
+
+      <div class="about-visual" data-reveal>
+        <div class="card-stack">
+          <div class="stack-bg" aria-hidden="true"></div>
+          <div class="business-card">
+            <img src="assets/business-card.jpg" alt="North Scape Services business card — Chance Perreault, (207) 402-4203, servicenorthscape@gmail.com. Lawn care, leaf disposal, gutters. Expect Excellence." />
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="section services">
-    <div class="section-head">
-      <p class="section-num">03 / SERVICES</p>
-      <h2 class="section-title">What I <em>Shoot</em></h2>
-      <p class="section-lede">Pick your package. Turnarounds are fast and edits come clean.</p>
-    </div>
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <div class="pricing-inner">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>Pricing</p>
+        <h2 class="section-title" data-reveal>Honest, up-front, <em>no surprises.</em></h2>
+        <p class="section-lede" data-reveal>
+          Every yard is different, so every quote is real — not a guess off a
+          website. Here's a starting range so you know what to expect.
+        </p>
+      </div>
 
-    <div class="services-grid">
-      <article class="service-card" data-hover>
-        <div class="service-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="32" cy="32" r="14"/>
-            <path d="M12 22 h8 l4-6 h16 l4 6 h8 v26 h-40z"/>
-          </svg>
+      <div class="pricing-grid">
+        <div class="price-card" data-reveal>
+          <p class="price-name">Weekly Mow</p>
+          <p class="price-amt"><span>$</span>35<em>+</em></p>
+          <p class="price-per">per visit, standard residential</p>
+          <ul>
+            <li>Mow, edge, trim</li>
+            <li>Walks blown off</li>
+            <li>Discount for the season</li>
+          </ul>
         </div>
-        <h3>Game Day</h3>
-        <p>Full-game coverage of any sport — football, basketball, hockey, soccer, baseball. Sideline access, action edits, and highlight-ready shots.</p>
-        <span class="price">from $150 / game</span>
-      </article>
 
-      <article class="service-card" data-hover>
-        <div class="service-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 52 h40"/><path d="M20 52 v-20 l12-12 12 12 v20"/><path d="M28 52 v-14 h8 v14"/>
-          </svg>
+        <div class="price-card highlight" data-reveal>
+          <span class="price-flag">Most booked</span>
+          <p class="price-name">Fall Cleanup</p>
+          <p class="price-amt"><span>$</span>185<em>+</em></p>
+          <p class="price-per">typical residential lot</p>
+          <ul>
+            <li>Full-yard leaf removal</li>
+            <li>Final seasonal mow</li>
+            <li>Bed cleanup + edging</li>
+            <li>Debris hauled away</li>
+          </ul>
         </div>
-        <h3>School Events</h3>
-        <p>Assemblies, dances, plays, concerts, spirit week. Documenting the moments your yearbook actually needs.</p>
-        <span class="price">from $200 / event</span>
-      </article>
 
-      <article class="service-card" data-hover>
-        <div class="service-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="32" cy="22" r="10"/><path d="M12 54 c 4-12 16-16 20-16 s 16 4 20 16"/>
-          </svg>
+        <div class="price-card" data-reveal>
+          <p class="price-name">One-Off Job</p>
+          <p class="price-amt"><span>$</span>75<em>+</em></p>
+          <p class="price-per">per project, quoted on site</p>
+          <ul>
+            <li>Storm cleanup</li>
+            <li>Gutter clearing</li>
+            <li>Brush hauling</li>
+          </ul>
         </div>
-        <h3>Portraits & Seniors</h3>
-        <p>Senior portraits, team headshots, and personal branding sessions. Outdoor Maine backdrops or clean studio-style setups.</p>
-        <span class="price">from $100 / session</span>
-      </article>
+      </div>
 
-      <article class="service-card" data-hover>
-        <div class="service-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="10" y="16" width="44" height="32" rx="4"/>
-            <circle cx="32" cy="32" r="8"/><path d="M46 22 h4"/>
-          </svg>
-        </div>
-        <h3>Custom Shoots</h3>
-        <p>Have something else in mind? Tournaments, family events, local businesses — reach out and we'll build it.</p>
-        <span class="price">DM for quote</span>
-      </article>
+      <p class="pricing-note" data-reveal>
+        Prices depend on lot size, access, and how much material there is. Text
+        or email for a real quote — free, no obligation.
+      </p>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="section contact">
+  <section id="contact" class="contact">
     <div class="contact-inner">
-      <p class="section-num">04 / CONTACT</p>
-      <h2 class="contact-title">
-        Let's make <em>something</em> <br/>
-        worth <span class="accent">remembering.</span>
-      </h2>
+      <div class="contact-copy">
+        <p class="eyebrow" data-reveal>Get a Quote</p>
+        <h2 class="section-title" data-reveal>Let's get your yard <em>on the schedule.</em></h2>
+        <p class="section-lede" data-reveal>
+          Text is fastest. Tell me your address and roughly what you're
+          looking for and I'll come out for a free estimate — usually within
+          a couple days.
+        </p>
 
-      <div class="contact-grid">
-        <a href="mailto:me.p1cs2000@gmail.com" class="contact-card" data-hover>
-          <span class="contact-label">EMAIL</span>
-          <span class="contact-value">me.p1cs2000@gmail.com</span>
-        </a>
-        <a href="tel:+12078887408" class="contact-card" data-hover>
-          <span class="contact-label">CALL / TEXT</span>
-          <span class="contact-value">(207) 888-7408</span>
-        </a>
-        <div class="contact-card static">
-          <span class="contact-label">BASED IN</span>
-          <span class="contact-value">Lewiston, Maine</span>
-        </div>
-        <div class="contact-card static">
-          <span class="contact-label">STUDIO</span>
-          <span class="contact-value">MW.P1CS</span>
-        </div>
+        <ul class="contact-links">
+          <li data-reveal>
+            <span class="ico">☎</span>
+            <div>
+              <span class="ico-label">Call or text</span>
+              <a href="tel:+12074024203">(207) 402-4203</a>
+            </div>
+          </li>
+          <li data-reveal>
+            <span class="ico">✉</span>
+            <div>
+              <span class="ico-label">Email</span>
+              <a href="mailto:servicenorthscape@gmail.com">servicenorthscape@gmail.com</a>
+            </div>
+          </li>
+          <li data-reveal>
+            <span class="ico">◈</span>
+            <div>
+              <span class="ico-label">Service area</span>
+              <span>Auburn · Lewiston · Poland · Minot · Turner</span>
+            </div>
+          </li>
+        </ul>
       </div>
 
-      <form class="contact-form" id="contactForm">
-        <div class="form-row">
-          <label>
-            <span>Name</span>
-            <input type="text" name="name" required />
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" required />
-          </label>
+      <form class="contact-form" id="quoteForm" data-reveal novalidate>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" required autocomplete="name" />
         </div>
-        <label>
-          <span>What are we shooting?</span>
-          <select name="type">
-            <option>Game Day</option>
-            <option>School Event</option>
-            <option>Portraits / Seniors</option>
-            <option>Custom Shoot</option>
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="(207) 555-0142"/>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email"/>
+          </div>
+        </div>
+        <div class="field">
+          <label for="address">Property address</label>
+          <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Street, Auburn ME"/>
+        </div>
+        <div class="field">
+          <label for="service">What do you need?</label>
+          <select id="service" name="service" required>
+            <option value="">Choose a service…</option>
+            <option>Fall cleanup</option>
+            <option>Weekly mowing</option>
+            <option>One-time mow</option>
+            <option>Gutter cleaning</option>
+            <option>Hedge / shrub trimming</option>
+            <option>Mulching / beds</option>
+            <option>Debris / brush hauling</option>
+            <option>Something else</option>
           </select>
-        </label>
-        <label>
-          <span>Tell me more</span>
-          <textarea name="message" rows="4" placeholder="Sport, school, date, location..."></textarea>
-        </label>
-        <button type="submit" class="btn btn-primary" data-hover>Send it →</button>
-        <p class="form-note" id="formNote"></p>
+        </div>
+        <div class="field">
+          <label for="notes">Anything else? (optional)</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Lot size, access notes, timing, that big maple in the back…"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Request my quote</button>
+        <p class="form-note" id="formNote" aria-live="polite"></p>
       </form>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-mark">MW.P1CS</div>
-    <div class="footer-meta">
-      <span>© <span id="year"></span> Myles Walker</span>
-      <span>·</span>
-      <span>Lewiston, Maine</span>
-      <span>·</span>
-      <a href="mailto:me.p1cs2000@gmail.com">me.p1cs2000@gmail.com</a>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logo.jpg" alt="North Scape Services" class="brand-logo" />
+        <div>
+          <p class="footer-name">North<span class="accent">Scape</span> Services</p>
+          <p class="footer-tag">Expect Excellence · Auburn, ME</p>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <p class="foot-h">Contact</p>
+          <a href="tel:+12074024203">(207) 402-4203</a>
+          <a href="mailto:servicenorthscape@gmail.com">servicenorthscape@gmail.com</a>
+        </div>
+        <div>
+          <p class="foot-h">Serving</p>
+          <span>Auburn</span>
+          <span>Lewiston</span>
+          <span>Poland · Minot · Turner</span>
+        </div>
+        <div>
+          <p class="foot-h">Hours</p>
+          <span>Mon – Sat · 7am – 7pm</span>
+          <span>Sun by request</span>
+        </div>
+      </div>
     </div>
+    <p class="footer-copy">© <span id="year"></span> North Scape Services · Owned by Chance Perreault · Auburn, Maine</p>
   </footer>
 
-  <!-- Three.js (UMD) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

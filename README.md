@@ -1,20 +1,32 @@
-# MW.P1CS — Myles Walker Photography
+# North Scape Services
 
-A 3D interactive portfolio site for **Myles Walker**, a freelance photographer
-based in **Lewiston, Maine**. Junior in high school. Studio name: **MW.P1CS**.
+Landscaping and fall cleanup website for **North Scape Services** — owned and
+operated by **Chance Perreault** in **Auburn, Maine**.
 
-- Phone: (207) 888-7408
-- Email: me.p1cs2000@gmail.com
+- Phone: (207) 402-4203
+- Email: servicenorthscape@gmail.com
+- Tagline: **Expect Excellence**
+
+## Services
+
+- Lawn care
+- Leaf disposal / fall cleanup
+- Gutter cleaning
+- Hedge & shrub trimming
+- Mulching & beds
+- Yard debris removal
+- Driveway & walk blow-off
+- Snow removal (coming winter 2026)
 
 ## Stack
 
-Vanilla HTML, CSS, and JavaScript — no build step. Three.js (loaded from CDN)
-powers the 3D backdrop: an interactive camera lens, floating photo cards, a
-particle field, and a scroll-driven camera rig.
+Vanilla HTML, CSS, and JavaScript — no build step. Fonts loaded from
+Google Fonts. Theme matches Chance's logo and business card: dark charcoal
+with bright kelly green accents and warm leaf highlights.
 
 ## Local preview
 
-Just open `index.html` in a browser, or serve the folder:
+Open `index.html` directly, or serve the folder:
 
 ```bash
 python3 -m http.server 8000
@@ -24,6 +36,8 @@ Then visit http://localhost:8000
 
 ## Files
 
-- `index.html` — page structure & sections (hero, work, about, services, contact)
-- `styles.css` — dark editorial theme, motion, responsive layout
-- `main.js`   — Three.js scene, gallery generator, cursor, reveals, form
+- `index.html` — page structure (hero, services, fall cleanup, about, pricing, contact)
+- `styles.css` — dark green theme, motion, responsive layout
+- `main.js`   — nav, reveal-on-scroll, falling leaves, contact form
+- `assets/logo.jpg` — the North Scape Services logo
+- `assets/business-card.jpg` — the business card design (featured in About)
