@@ -39,6 +39,7 @@
       <a href="#services">Services</a>
       <a href="#fall">Fall Cleanup</a>
       <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
       <a href="#pricing">Pricing</a>
       <a href="#contact" class="nav-cta">Get a Quote</a>
     </nav>
@@ -108,6 +109,7 @@
     <span>Leaf Disposal</span><span class="dot"></span>
     <span>Gutters</span><span class="dot"></span>
     <span>Fall Cleanup</span><span class="dot"></span>
+    <span>5-Star Reviews</span><span class="dot"></span>
     <span>Auburn, Maine</span>
   </div>
 
@@ -274,6 +276,135 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="section reviews">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>Reviews</p>
+      <h2 class="section-title" data-reveal>What the neighbors <em>are saying.</em></h2>
+      <p class="section-lede" data-reveal>
+        Word gets around fast in a town this size. Here's what folks around
+        Auburn have said after a job — and if I've worked for you, I'd love
+        it if you'd leave one too.
+      </p>
+    </div>
+
+    <div class="reviews-layout">
+      <!-- Review cards -->
+      <div class="reviews-grid" id="reviewsGrid" data-reveal>
+
+        <article class="review-card">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="review-quote">
+            Chance showed up right on time and had the whole yard bagged and
+            hauled before dinner. Better job than the guy we paid twice as much
+            last year. Highly recommend.
+          </p>
+          <footer class="review-meta">
+            <div class="review-avatar" aria-hidden="true">S</div>
+            <div>
+              <p class="review-name">Sarah M.</p>
+              <p class="review-loc">Fall Cleanup · Auburn</p>
+            </div>
+          </footer>
+        </article>
+
+        <article class="review-card">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="review-quote">
+            Great kid, great work. Mowed the lawn better than I ever did and
+            actually cleans up the walkway after. Been booking him weekly
+            since spring.
+          </p>
+          <footer class="review-meta">
+            <div class="review-avatar" aria-hidden="true">R</div>
+            <div>
+              <p class="review-name">Rob T.</p>
+              <p class="review-loc">Weekly Mow · Lewiston</p>
+            </div>
+          </footer>
+        </article>
+
+        <article class="review-card">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="review-quote">
+            Cleared out the gutters and hauled off a huge pile of storm brush
+            in one trip. Texted before he came, texted when he was done.
+            Really nice young man to work with.
+          </p>
+          <footer class="review-meta">
+            <div class="review-avatar" aria-hidden="true">D</div>
+            <div>
+              <p class="review-name">Denise P.</p>
+              <p class="review-loc">Gutters + Debris · Poland</p>
+            </div>
+          </footer>
+        </article>
+
+      </div>
+
+      <!-- Leave a review -->
+      <aside class="review-form-wrap" data-reveal>
+        <div class="review-form-head">
+          <p class="eyebrow">Leave a review</p>
+          <h3>Worked with North Scape?</h3>
+          <p class="review-sub">Rate your experience below. Your review will be emailed to Chance and he’ll add it to the site.</p>
+        </div>
+
+        <form id="reviewForm" class="review-form" novalidate>
+          <div class="star-picker" role="radiogroup" aria-label="Star rating">
+            <button type="button" class="star" data-value="1" role="radio" aria-checked="false" aria-label="1 star">★</button>
+            <button type="button" class="star" data-value="2" role="radio" aria-checked="false" aria-label="2 stars">★</button>
+            <button type="button" class="star" data-value="3" role="radio" aria-checked="false" aria-label="3 stars">★</button>
+            <button type="button" class="star" data-value="4" role="radio" aria-checked="false" aria-label="4 stars">★</button>
+            <button type="button" class="star" data-value="5" role="radio" aria-checked="false" aria-label="5 stars">★</button>
+            <span class="star-caption" id="starCaption">Tap to rate</span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="rvName">Your name</label>
+              <input id="rvName" name="rvName" type="text" required autocomplete="name" placeholder="First name and last initial" />
+            </div>
+            <div class="field">
+              <label for="rvService">Service</label>
+              <select id="rvService" name="rvService" required>
+                <option value="">Choose…</option>
+                <option>Fall cleanup</option>
+                <option>Weekly mowing</option>
+                <option>One-time mow</option>
+                <option>Gutter cleaning</option>
+                <option>Hedge / shrub trimming</option>
+                <option>Mulching / beds</option>
+                <option>Debris / brush hauling</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="rvTown">Town</label>
+            <input id="rvTown" name="rvTown" type="text" placeholder="Auburn, Lewiston…" />
+          </div>
+
+          <div class="field">
+            <label for="rvText">Your review</label>
+            <textarea id="rvText" name="rvText" rows="4" required placeholder="What was the work like? Anything Chance did well?"></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Send my review</button>
+          <p class="form-note" id="reviewNote" aria-live="polite"></p>
+        </form>
+      </aside>
     </div>
   </section>
 

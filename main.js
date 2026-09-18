@@ -449,6 +449,167 @@
     });
   }
 
+
+  /* =========================================================
+     REVIEWS — star picker, submit, local persistence
+     ========================================================= */
+  const starPicker = document.querySelector('.star-picker');
+  const starCaption = document.getElementById('starCaption');
+  const reviewsGrid = document.getElementById('reviewsGrid');
+  const reviewForm = document.getElementById('reviewForm');
+  const reviewNote = document.getElementById('reviewNote');
+  let starValue = 0;
+
+  const captions = {
+    0: 'Tap to rate',
+    1: 'Rough — 1/5',
+    2: 'Okay — 2/5',
+    3: 'Good — 3/5',
+    4: 'Great — 4/5',
+    5: 'Excellent — 5/5',
+  };
+
+  function paintStars (val) {
+    if (!starPicker) return;
+    starPicker.querySelectorAll('.star').forEach(s => {
+      const v = Number(s.dataset.value);
+      s.classList.toggle('active', v <= val);
+      s.setAttribute('aria-checked', String(v === val));
+    });
+  }
+
+  if (starPicker) {
+    const stars = starPicker.querySelectorAll('.star');
+    stars.forEach(star => {
+      star.addEventListener('mouseenter', () => {
+        const v = Number(star.dataset.value);
+        stars.forEach(s => s.classList.toggle('hovered', Number(s.dataset.value) <= v));
+        starCaption.textContent = captions[v];
+      });
+      star.addEventListener('mouseleave', () => {
+        stars.forEach(s => s.classList.remove('hovered'));
+        starCaption.textContent = captions[starValue] || captions[0];
+      });
+      star.addEventListener('click', () => {
+        starValue = Number(star.dataset.value);
+        starPicker.classList.add('picked');
+        starCaption.textContent = captions[starValue];
+        paintStars(starValue);
+      });
+      star.addEventListener('keydown', (e) => {
+        const cur = Number(star.dataset.value);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+          const next = Math.min(5, cur + 1);
+          starPicker.querySelector(`.star[data-value="${next}"]`).focus();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+          const prev = Math.max(1, cur - 1);
+          starPicker.querySelector(`.star[data-value="${prev}"]`).focus();
+        } else if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          star.click();
+        }
+      });
+    });
+  }
+
+  function makeAvatar (name) {
+    return (name || '?').trim().charAt(0).toUpperCase() || '?';
+  }
+
+  function escapeHTML (str) {
+    return String(str).replace(/[&<>"']/g, ch => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[ch]));
+  }
+
+  function renderReview (review, prepend) {
+    if (!reviewsGrid) return;
+    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+    const card = document.createElement('article');
+    card.className = 'review-card you';
+    card.innerHTML = `
+      <span class="you-flag">Your review</span>
+      <div class="review-stars" aria-label="${review.rating} out of 5 stars">
+        ${stars.split('').map(c => `<span>${c === '★' ? '★' : '☆'}</span>`).join('')}
+      </div>
+      <p class="review-quote">${escapeHTML(review.text)}</p>
+      <footer class="review-meta">
+        <div class="review-avatar" aria-hidden="true">${escapeHTML(makeAvatar(review.name))}</div>
+        <div>
+          <p class="review-name">${escapeHTML(review.name)}</p>
+          <p class="review-loc">${escapeHTML(review.service || 'Service')}${review.town ? ' · ' + escapeHTML(review.town) : ''}</p>
+        </div>
+      </footer>
+    `;
+    if (prepend) reviewsGrid.prepend(card);
+    else reviewsGrid.appendChild(card);
+  }
+
+  // Load previously-submitted reviews from this browser
+  try {
+    const saved = JSON.parse(localStorage.getItem('northscape_reviews') || '[]');
+    saved.forEach(r => renderReview(r, true));
+  } catch (_) { /* ignore */ }
+
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('rvName').value.trim();
+      const service = document.getElementById('rvService').value.trim();
+      const town = document.getElementById('rvTown').value.trim();
+      const text = document.getElementById('rvText').value.trim();
+
+      if (!starValue) {
+        reviewNote.style.color = '#e5a54b';
+        reviewNote.textContent = 'Pick a star rating first.';
+        return;
+      }
+      if (!name || !service || !text) {
+        reviewNote.style.color = '#e5a54b';
+        reviewNote.textContent = 'Add your name, service, and review before sending.';
+        return;
+      }
+
+      const review = { rating: starValue, name, service, town, text, ts: Date.now() };
+
+      // Persist for this browser
+      try {
+        const saved = JSON.parse(localStorage.getItem('northscape_reviews') || '[]');
+        saved.unshift(review);
+        localStorage.setItem('northscape_reviews', JSON.stringify(saved.slice(0, 5)));
+      } catch (_) { /* ignore */ }
+
+      // Show it right away
+      renderReview(review, true);
+
+      // Email Chance a copy so he can approve/add to the site
+      const subj = `New review — ${starValue}★ — ${name}`;
+      const body = [
+        `Name: ${name}`,
+        `Rating: ${starValue} / 5`,
+        `Service: ${service}`,
+        town ? `Town: ${town}` : null,
+        '',
+        'Review:',
+        text,
+        '',
+        '— Sent from the North Scape Services site',
+      ].filter(Boolean).join('\n');
+      const mailto = `mailto:servicesnorthscape@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+
+      reviewNote.style.color = '#23c552';
+      reviewNote.textContent = 'Thanks! Your review is posted here and an email is opening so you can send Chance a copy.';
+      window.setTimeout(() => { window.location.href = mailto; }, 600);
+
+      // Reset picker & form
+      reviewForm.reset();
+      starValue = 0;
+      paintStars(0);
+      starPicker.classList.remove('picked');
+      starCaption.textContent = captions[0];
+    });
+  }
+
   /* =========================================================
      Footer year
      ========================================================= */
