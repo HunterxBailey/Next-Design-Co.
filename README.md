@@ -4,7 +4,7 @@ Landscaping and fall cleanup website for **North Scape Services** — owned and
 operated by **Chance Perreault** in **Auburn, Maine**.
 
 - Phone: (207) 402-4203
-- Email: servicenorthscape@gmail.com
+- Email: servicesnorthscape@gmail.com
 - Tagline: **Expect Excellence**
 
 ## Services

@@ -440,7 +440,7 @@
         notes ? `\nNotes:\n${notes}` : null,
         `\n— Sent from northscapeservices site`
       ].filter(Boolean).join('\n');
-      const mailto = `mailto:servicenorthscape@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+      const mailto = `mailto:servicesnorthscape@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
 
       note.style.color = '#23c552';
       note.textContent = 'Thanks — opening your email so you can send this to Chance…';
