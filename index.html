@@ -3,446 +3,390 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>North Scape Services — Leaf Cleanup & Yard Services · Auburn, Maine</title>
-  <meta name="description" content="North Scape Services — Leaf cleanup, lawn care, and gutter clearing in Auburn, Maine. Owned and operated by Chance Perreault. Expect Excellence." />
-  <meta name="theme-color" content="#121312" />
-  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <title>Clear Path Snow Co. — Driveway & Walkway Snow Removal · Auburn, Maine</title>
+  <meta name="description" content="Clear Path Snow Co. — student-run snow removal in Auburn, Maine. Driveway shoveling, snowblowing, walkways, steps, and car brush-offs. Per-storm or season plans." />
+  <meta name="theme-color" content="#08131f" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
 </head>
 <body>
 
-  <!-- Loader -->
-  <div id="loader" aria-hidden="true">
-    <div class="loader-ring">
-      <span></span><span></span><span></span>
-    </div>
-    <p class="loader-text">NORTH<span class="accent">SCAPE</span> · SERVICES</p>
-  </div>
-
-  <!-- 3D Canvas (hero background) -->
-  <canvas id="three-canvas" aria-hidden="true"></canvas>
+  <canvas id="snow" aria-hidden="true"></canvas>
 
   <!-- Nav -->
   <header id="nav">
-    <a href="#home" class="brand" aria-label="North Scape Services home">
-      <img src="assets/logo.jpg" alt="North Scape Services logo" class="brand-logo" />
+    <a href="#home" class="brand" aria-label="Clear Path Snow Co. home">
+      <img src="assets/logo.svg" alt="" class="brand-logo" width="40" height="40" />
       <span class="brand-text">
-        <span class="brand-line1">North<span class="accent">Scape</span></span>
-        <span class="brand-line2">Expect Excellence</span>
+        <span class="brand-name">Clear Path</span>
+        <span class="brand-sub">Snow Co. · Auburn, ME</span>
       </span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#services">Services</a>
-      <a href="#fall">Fall Cleanup</a>
-      <a href="#about">About</a>
+      <a href="#schedule">Schedule</a>
       <a href="#pricing">Pricing</a>
-      <a href="#contact" class="nav-cta">Get a Quote</a>
+      <a href="#area">Service Area</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn btn-small">Get on the List</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="leaves" id="leaves"></div>
-    </div>
-
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow" data-reveal>Auburn, Maine · (207) 402-4203</p>
-        <h1 class="hero-title" data-reveal>
-          Sharp lawns.<br/>
-          <span class="hero-accent">Clean yards.</span><br/>
-          <span class="hero-strike">Expect Excellence.</span>
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Auburn, Maine · Winter 2026–27</p>
+        <h1 class="hero-title">
+          Out before the bus.<br/>
+          <span class="ice">Back after the bell.</span>
         </h1>
-        <p class="hero-lede" data-reveal>
-          North Scape Services is a landscaping and fall cleanup crew based in
-          Auburn. Owned and operated by Chance Perreault — honest work, fair
-          prices, and yards that look like someone actually cared.
+        <p class="hero-lede">
+          Clear Path Snow Co. is a local, student-run snow removal service. I clear
+          driveways, walkways, and steps across Auburn, fitting every storm around
+          my school day so you're dug out on a schedule you can count on.
         </p>
-        <div class="hero-cta" data-reveal>
-          <a href="#contact" class="btn btn-primary">Get a free quote</a>
-          <a href="#services" class="btn btn-ghost">What we do →</a>
+        <div class="hero-actions">
+          <a href="#contact" class="btn">Reserve a Season Spot</a>
+          <a href="#estimate" class="btn btn-ghost">Get an Instant Estimate</a>
         </div>
-
-        <div class="hero-meta" data-reveal>
-          <div class="meta-item">
-            <span class="meta-num"><span class="accent" data-count="7">0</span>+</span>
-            <span class="meta-label">Services</span>
-          </div>
-          <div class="meta-divider"></div>
-          <div class="meta-item">
-            <span class="meta-num">Free</span>
-            <span class="meta-label">Estimates</span>
-          </div>
-          <div class="meta-divider"></div>
-          <div class="meta-item">
-            <span class="meta-num"><span class="accent" data-count="207">0</span></span>
-            <span class="meta-label">Local Maine</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-visual" data-reveal>
-        <div class="hero-logo-wrap">
-          <img src="assets/logo.jpg" alt="North Scape Services — logo with mower, leaf blower, and grass" />
-        </div>
-        <div class="hero-tagline">Expect Excellence</div>
-      </div>
-    </div>
-
-    <a href="#services" class="scroll-hint" aria-label="Scroll down">
-      <span></span>
-    </a>
-  </section>
-
-  <!-- Excellence strip -->
-  <div class="strip" aria-hidden="true">
-    <span>Lawn Care</span><span class="dot"></span>
-    <span>Leaf Disposal</span><span class="dot"></span>
-    <span>Gutters</span><span class="dot"></span>
-    <span>Fall Cleanup</span><span class="dot"></span>
-    <span>Auburn, Maine</span>
-  </div>
-
-  <!-- SERVICES -->
-  <section id="services" class="section services">
-    <div class="section-head">
-      <p class="eyebrow" data-reveal>Services</p>
-      <h2 class="section-title" data-reveal>Everything your yard needs, <em>one crew.</em></h2>
-      <p class="section-lede" data-reveal>
-        From weekly mowing to a full end-of-season cleanup, we handle the work
-        that keeps a property looking cared for through every Maine season.
-      </p>
-    </div>
-
-    <div class="service-grid">
-      <article class="service-card" data-reveal>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M6 34 L12 22 L18 30 L26 14 L34 26 L42 20 L42 38 L6 38 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Lawn Care</h3>
-        <p>Weekly or bi-weekly mowing, clean edges, walks blown off. Sharp, striped, done right.</p>
-      </article>
-
-      <article class="service-card featured" data-reveal>
-        <div class="service-badge">Season</div>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M24 6 C18 14 14 20 14 26 C14 32 18 36 24 36 C30 36 34 32 34 26 C34 20 30 14 24 6 Z M24 36 L24 42" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Leaf Disposal</h3>
-        <p>Full-yard leaf removal, hauled away or mulched down. One-time or recurring through the season — pick what fits.</p>
-      </article>
-
-      <article class="service-card" data-reveal>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M8 20 L24 8 L40 20 L40 40 L8 40 Z M18 40 L18 28 L30 28 L30 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Gutters</h3>
-        <p>Clear out packed leaves and debris before the freeze so water goes where it should — not into your basement.</p>
-      </article>
-
-      <article class="service-card" data-reveal>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M6 38 L14 22 L22 32 L30 18 L42 38 Z M14 22 L14 10 M30 18 L30 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Hedge & Shrub Trimming</h3>
-        <p>Shaped, tidy, and even. We clean up the clippings and leave the beds looking finished.</p>
-      </article>
-
-      <article class="service-card" data-reveal>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M6 34 L42 34 M10 34 C10 24 16 20 24 20 C32 20 38 24 38 34 M24 20 L24 10 M20 14 L24 10 L28 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Mulching & Beds</h3>
-        <p>Fresh mulch, sharp bed edges, weeds pulled. The kind of curb appeal that gets noticed from the road.</p>
-      </article>
-
-      <article class="service-card" data-reveal>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M8 30 L20 18 L28 26 L40 14 M28 14 L40 14 L40 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 38 L40 38" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Yard Debris Removal</h3>
-        <p>Storm cleanup, brush piles, downed limbs — hauled off and gone. Reclaim your Saturday.</p>
-      </article>
-
-      <article class="service-card" data-reveal>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M24 8 L24 40 M12 12 L36 36 M12 36 L36 12 M8 24 L40 24 M18 8 L24 14 L30 8 M18 40 L24 34 L30 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Driveway & Walk Blow-Off</h3>
-        <p>Add-on to any service — walks, decks, and drives blown clear so the finished job actually looks finished.</p>
-      </article>
-
-      <article class="service-card ghost" data-reveal>
-        <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M24 8 V40 M8 24 H40 M14 14 L34 34 M14 34 L34 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Snow Removal</h3>
-        <p class="coming">Coming winter 2026 — reserve your spot early. Residential driveways and walks in the Auburn area.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- FALL FEATURE -->
-  <section id="fall" class="fall">
-    <div class="fall-inner">
-      <div class="fall-copy">
-        <p class="eyebrow" data-reveal>Right Now · Fall 2026</p>
-        <h2 class="section-title" data-reveal>Book your <em>fall cleanup</em> before the first frost.</h2>
-        <p class="section-lede" data-reveal>
-          Leaves don't wait, and neither should you. A full fall cleanup means
-          less matting, healthier grass in spring, and a lot fewer weekends
-          spent behind a rake.
-        </p>
-        <ul class="fall-list" data-reveal>
-          <li><span>1</span>Full-property leaf removal — front, back, beds, corners.</li>
-          <li><span>2</span>Final mow at winter height so grass overwinters well.</li>
-          <li><span>3</span>Gutters cleared and rinsed to prevent ice dams.</li>
-          <li><span>4</span>Beds cut back and edges cleaned for a tidy finish.</li>
-          <li><span>5</span>All debris hauled off — nothing left behind.</li>
+        <ul class="hero-stats">
+          <li><strong>2"</strong><span>Trigger depth, season plans</span></li>
+          <li><strong>5 AM</strong><span>Morning route starts</span></li>
+          <li><strong>$25</strong><span>Per-storm visits from</span></li>
         </ul>
-        <a href="#contact" class="btn btn-primary" data-reveal>Reserve my cleanup</a>
       </div>
-      <aside class="fall-card" data-reveal>
-        <div class="fall-card-header">
-          <span class="pulse"></span>
-          <span>Booking now</span>
+      <div class="hero-card" aria-label="Storm status">
+        <div class="storm-head">
+          <span class="dot"></span>
+          <span>Accepting clients</span>
         </div>
-        <p class="fall-card-title">Fall Cleanup Package</p>
-        <p class="fall-card-price">
-          <span class="from">Starting at</span>
-          <span class="amount">$185</span>
-          <span class="per">/ typical residential lot</span>
+        <p class="storm-title">Season plan spots are limited</p>
+        <p class="storm-copy">
+          I only take as many season clients as I can clear properly before and
+          after school. When the route is full, it's full.
         </p>
-        <ul>
-          <li>Leaf removal, hauled away</li>
-          <li>Final seasonal mow</li>
-          <li>Bed cleanup + edging</li>
-          <li>Walkways blown clear</li>
-        </ul>
-        <p class="fall-card-note">Every yard is different — free on-site estimates within the Auburn / Lewiston area.</p>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section about">
-    <div class="about-grid">
-      <div class="about-copy">
-        <p class="eyebrow" data-reveal>About</p>
-        <h2 class="section-title" data-reveal>Hi — I'm <em>Chance.</em></h2>
-        <p class="about-lede" data-reveal>
-          I'm eighteen, born and raised in Maine, and I started North Scape
-          Services because I like working outside and I like doing a job the
-          right way. This isn't a side hustle for gas money. It's a real
-          business, and every yard I take on gets treated like it matters —
-          because it does.
-        </p>
-        <p data-reveal>
-          I show up when I say I will. I clean up after myself. I don't cut
-          corners just because nobody's watching. If you want that, I'd love
-          to work for you.
-        </p>
-        <div class="about-values" data-reveal>
-          <div class="value">
-            <strong>On time.</strong>
-            <span>Text updates before I show up. No mystery arrivals.</span>
-          </div>
-          <div class="value">
-            <strong>Fair price.</strong>
-            <span>Free quotes up front. What we agree on is what you pay.</span>
-          </div>
-          <div class="value">
-            <strong>Clean finish.</strong>
-            <span>Walks blown off, gates closed, nothing left behind.</span>
-          </div>
+        <div class="meter" role="img" aria-label="Season spots filled">
+          <div class="meter-fill" id="spotsFill"></div>
         </div>
+        <p class="meter-label"><span id="spotsLeft">—</span> of <span id="spotsTotal">—</span> season spots open</p>
       </div>
+    </section>
 
-      <div class="about-visual" data-reveal>
-        <div class="card-stack">
-          <div class="stack-bg" aria-hidden="true"></div>
-          <div class="business-card">
-            <img src="assets/business-card.jpg" alt="North Scape Services business card — Chance Perreault, (207) 402-4203, servicenorthscape@gmail.com. Lawn care, leaf disposal, gutters. Expect Excellence." />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="pricing">
-    <div class="pricing-inner">
+    <!-- SERVICES -->
+    <section id="services" class="section">
       <div class="section-head">
-        <p class="eyebrow" data-reveal>Pricing</p>
-        <h2 class="section-title" data-reveal>Honest, up-front, <em>no surprises.</em></h2>
-        <p class="section-lede" data-reveal>
-          Every yard is different, so every quote is real — not a guess off a
-          website. Here's a starting range so you know what to expect.
+        <p class="eyebrow">What I do</p>
+        <h2>Snow cleared right, every storm.</h2>
+        <p>Residential only. Driveways, paths, and the little stuff that makes a morning easier.</p>
+      </div>
+      <div class="grid services">
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V10l7-5 7 5v10M9 20v-5h6v5"/></svg>
+          </div>
+          <h3>Driveway clearing</h3>
+          <p>Shoveled or snowblown edge to edge, including the end-of-driveway plow bank when possible.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20h4v-4h4v-4h4V8h4"/></svg>
+          </div>
+          <h3>Walkways & steps</h3>
+          <p>Front walk, porch steps, and the path to the door, cleared down to the pavement.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 15l2-5h14l2 5v4H3zM7 19v1M17 19v1M6 15h.01M18 15h.01"/></svg>
+          </div>
+          <h3>Car brush-off</h3>
+          <p>Snow and loose ice brushed off your car so you can just get in and go.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-5 7 5M7 21h10"/></svg>
+          </div>
+          <h3>Salt & sand</h3>
+          <p>Ice melt on steps and walkways after clearing. Pet-safe option available on request.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7M6 10v10h12V10M2 21h20"/></svg>
+          </div>
+          <h3>Roof raking (ground level)</h3>
+          <p>Snow pulled off low roof edges from the ground with a roof rake. I stay off the roof itself.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="9" rx="2"/><path d="M12 13v8M8 21h8"/></svg>
+          </div>
+          <h3>Mailbox & hydrant</h3>
+          <p>Mailbox access dug out for the carrier, and the nearby hydrant cleared for the fire department.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section id="schedule" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow">Storm timing</p>
+        <h2>Built around the school day.</h2>
+        <p>
+          I'm a full-time high school student, so I'm upfront about when I work.
+          Here's when you can expect me after a storm:
         </p>
       </div>
 
-      <div class="pricing-grid">
-        <div class="price-card" data-reveal>
-          <p class="price-name">Weekly Mow</p>
-          <p class="price-amt"><span>$</span>35<em>+</em></p>
-          <p class="price-per">per visit, standard residential</p>
-          <ul>
-            <li>Mow, edge, trim</li>
-            <li>Walks blown off</li>
-            <li>Discount for the season</li>
-          </ul>
+      <div class="timeline" role="list">
+        <div class="slot slot-work" role="listitem">
+          <span class="slot-time">5:00 – 7:15 AM</span>
+          <h3>Morning route</h3>
+          <p>Overnight snow gets cleared before school, starting with season clients who leave early for work.</p>
         </div>
-
-        <div class="price-card highlight" data-reveal>
-          <span class="price-flag">Most booked</span>
-          <p class="price-name">Fall Cleanup</p>
-          <p class="price-amt"><span>$</span>185<em>+</em></p>
-          <p class="price-per">typical residential lot</p>
-          <ul>
-            <li>Full-yard leaf removal</li>
-            <li>Final seasonal mow</li>
-            <li>Bed cleanup + edging</li>
-            <li>Debris hauled away</li>
-          </ul>
+        <div class="slot slot-school" role="listitem">
+          <span class="slot-time">7:30 AM – 2:15 PM</span>
+          <h3>At school</h3>
+          <p>No service during class. If it snows during the day, you're first on the list at 2:30.</p>
         </div>
-
-        <div class="price-card" data-reveal>
-          <p class="price-name">One-Off Job</p>
-          <p class="price-amt"><span>$</span>75<em>+</em></p>
-          <p class="price-per">per project, quoted on site</p>
-          <ul>
-            <li>Storm cleanup</li>
-            <li>Gutter clearing</li>
-            <li>Brush hauling</li>
-          </ul>
+        <div class="slot slot-work" role="listitem">
+          <span class="slot-time">2:30 PM – 8:00 PM</span>
+          <h3>Afternoon route</h3>
+          <p>Daytime snow gets cleared, plus a cleanup pass for the plow bank at the end of your driveway.</p>
+        </div>
+        <div class="slot slot-weekend" role="listitem">
+          <span class="slot-time">Weekends & snow days</span>
+          <h3>All-day route</h3>
+          <p>Snow days and weekends run all day, with return visits during long storms.</p>
         </div>
       </div>
 
-      <p class="pricing-note" data-reveal>
-        Prices depend on lot size, access, and how much material there is. Text
-        or email for a real quote — free, no obligation.
-      </p>
-    </div>
-  </section>
+      <div class="callout">
+        <strong>Big storm?</strong> For storms over 12", I clear once mid-storm (if it's safe)
+        and again when it ends. You'll get a text with your estimated arrival time before every route.
+      </div>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <div class="contact-inner">
-      <div class="contact-copy">
-        <p class="eyebrow" data-reveal>Get a Quote</p>
-        <h2 class="section-title" data-reveal>Let's get your yard <em>on the schedule.</em></h2>
-        <p class="section-lede" data-reveal>
-          Text is fastest. Tell me your address and roughly what you're
-          looking for and I'll come out for a free estimate — usually within
-          a couple days.
-        </p>
-
-        <ul class="contact-links">
-          <li data-reveal>
-            <span class="ico">☎</span>
-            <div>
-              <span class="ico-label">Call or text</span>
-              <a href="tel:+12074024203">(207) 402-4203</a>
-            </div>
-          </li>
-          <li data-reveal>
-            <span class="ico">✉</span>
-            <div>
-              <span class="ico-label">Email</span>
-              <a href="mailto:servicenorthscape@gmail.com">servicenorthscape@gmail.com</a>
-            </div>
-          </li>
-          <li data-reveal>
-            <span class="ico">◈</span>
-            <div>
-              <span class="ico-label">Service area</span>
-              <span>Auburn · Lewiston · Poland · Minot · Turner</span>
-            </div>
-          </li>
-        </ul>
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="section-head">
+        <p class="eyebrow">Pricing</p>
+        <h2>Simple, honest prices.</h2>
+        <p>Pay per storm, or lock in a flat price for the whole season. Payment by cash, Venmo, or check.</p>
       </div>
 
-      <form class="contact-form" id="quoteForm" data-reveal novalidate>
-        <div class="field">
-          <label for="name">Your name</label>
-          <input id="name" name="name" type="text" required autocomplete="name" />
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="phone">Phone</label>
-            <input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="(207) 555-0142"/>
+      <div class="grid pricing">
+        <article class="price-card">
+          <h3>Per storm</h3>
+          <p class="price"><span>from</span> $25</p>
+          <p class="price-note">Call or text when you need me</p>
+          <ul>
+            <li>1-car driveway: $25</li>
+            <li>2-car driveway: $35</li>
+            <li>Large / long driveway: $50+</li>
+            <li>Priced for up to 8" of snow</li>
+            <li>Season clients get served first</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost btn-block">Request a Visit</a>
+        </article>
+
+        <article class="price-card featured">
+          <span class="badge">Most popular</span>
+          <h3>Season plan</h3>
+          <p class="price"><span>from</span> $300</p>
+          <p class="price-note">Nov 15 – Apr 1 · every storm of 2"+</p>
+          <ul>
+            <li>1-car driveway: $300 / season</li>
+            <li>2-car driveway: $425 / season</li>
+            <li>Large / long driveway: $575+</li>
+            <li>Automatic service, no calls needed</li>
+            <li>Front walk & steps included</li>
+            <li>Pay in full, or split into 2 payments</li>
+          </ul>
+          <a href="#contact" class="btn btn-block">Reserve My Spot</a>
+        </article>
+
+        <article class="price-card">
+          <h3>Add-ons</h3>
+          <p class="price"><span>+</span> $10</p>
+          <p class="price-note">Add to any visit</p>
+          <ul>
+            <li>Extra walkway / back steps: $10</li>
+            <li>Car brush-off: $10 per car</li>
+            <li>Salt / ice melt: $5</li>
+            <li>Roof rake (ground level): $40+</li>
+            <li>Storms over 12": +50% (per storm)</li>
+          </ul>
+          <a href="#estimate" class="btn btn-ghost btn-block">Build an Estimate</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ESTIMATOR -->
+    <section id="estimate" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow">Instant estimate</p>
+        <h2>What will it cost?</h2>
+        <p>Pick your options for a ballpark price. I'll confirm it after a quick look at your property.</p>
+      </div>
+
+      <form class="estimator" id="estimator" onsubmit="return false">
+        <fieldset>
+          <legend>Driveway size</legend>
+          <div class="chips">
+            <label><input type="radio" name="size" value="small" checked /><span>1-car</span></label>
+            <label><input type="radio" name="size" value="medium" /><span>2-car</span></label>
+            <label><input type="radio" name="size" value="large" /><span>Large / long</span></label>
           </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email"/>
+        </fieldset>
+        <fieldset>
+          <legend>Plan</legend>
+          <div class="chips">
+            <label><input type="radio" name="plan" value="storm" checked /><span>Per storm</span></label>
+            <label><input type="radio" name="plan" value="season" /><span>Season plan</span></label>
           </div>
+        </fieldset>
+        <fieldset>
+          <legend>Add-ons</legend>
+          <div class="chips">
+            <label><input type="checkbox" name="addon" value="walk" /><span>Extra walkway</span></label>
+            <label><input type="checkbox" name="addon" value="car" /><span>Car brush-off</span></label>
+            <label><input type="checkbox" name="addon" value="salt" /><span>Salt / ice melt</span></label>
+          </div>
+        </fieldset>
+        <div class="estimate-out" aria-live="polite">
+          <p class="estimate-label" id="estimateLabel">Estimated per storm</p>
+          <p class="estimate-price" id="estimatePrice">$25</p>
+          <p class="estimate-note" id="estimateNote">Based on a typical Auburn storm under 8".</p>
+          <a href="#contact" class="btn btn-block" id="estimateCta">Send This to Me</a>
         </div>
-        <div class="field">
-          <label for="address">Property address</label>
-          <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Street, Auburn ME"/>
-        </div>
-        <div class="field">
-          <label for="service">What do you need?</label>
-          <select id="service" name="service" required>
-            <option value="">Choose a service…</option>
-            <option>Fall cleanup</option>
-            <option>Weekly mowing</option>
-            <option>One-time mow</option>
-            <option>Gutter cleaning</option>
-            <option>Hedge / shrub trimming</option>
-            <option>Mulching / beds</option>
-            <option>Debris / brush hauling</option>
-            <option>Something else</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="notes">Anything else? (optional)</label>
-          <textarea id="notes" name="notes" rows="4" placeholder="Lot size, access notes, timing, that big maple in the back…"></textarea>
-        </div>
-        <button class="btn btn-primary" type="submit">Request my quote</button>
-        <p class="form-note" id="formNote" aria-live="polite"></p>
       </form>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
+    <!-- SERVICE AREA -->
+    <section id="area" class="section">
+      <div class="area">
+        <div>
+          <p class="eyebrow">Service area</p>
+          <h2>Auburn neighborhoods, close to home.</h2>
+          <p>
+            I keep my route tight so I can get to everyone before first bell.
+            If you're in one of these areas, you're probably on my way:
+          </p>
+          <ul class="tags">
+            <li>Downtown Auburn</li>
+            <li>New Auburn</li>
+            <li>West Auburn</li>
+            <li>East Auburn</li>
+            <li>Danville</li>
+            <li>Minot Ave area</li>
+            <li>Court St / Turner St</li>
+            <li>Lake Auburn area</li>
+          </ul>
+          <p class="small">Outside these areas, or in Lewiston? Reach out anyway. If you're close to my route, I'll try to fit you in.</p>
+        </div>
+        <div class="about-card">
+          <p class="eyebrow">About me</p>
+          <h3>Hi, I'm <span data-owner>the owner</span>.</h3>
+          <p>
+            I'm a 17-year-old high school student who grew up in Auburn and has
+            been shoveling these winters my whole life. I started Clear Path to
+            build a real business and save for my future. You'll always deal with
+            me directly: I answer the texts and I do the work.
+          </p>
+          <ul class="checks">
+            <li>Reliable, and I show up when I say I will</li>
+            <li>I text before and after every visit</li>
+            <li>Careful around cars, gardens, and walkways</li>
+            <li>References from Auburn neighbors available</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section section-alt">
+      <div class="section-head">
+        <p class="eyebrow">FAQ</p>
+        <h2>Good questions.</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>What happens if it snows during school?</summary>
+          <p>Daytime snow gets cleared starting at 2:30 PM, with season clients first. If you need your driveway clear by a set time, tell me when you sign up and I'll plan the route around it.</p>
+        </details>
+        <details>
+          <summary>What counts as a "storm" on the season plan?</summary>
+          <p>Any snowfall of 2 inches or more. Light dustings under 2" aren't included, but I'll clear them if you ask. Storms over 12" are still covered on the season plan, with a mid-storm pass when it's safe.</p>
+        </details>
+        <details>
+          <summary>The city plow filled in my driveway again. Do you come back?</summary>
+          <p>Season clients get one free return visit per storm to clear the plow bank at the end of the driveway. Per-storm clients can add a return visit for $10.</p>
+        </details>
+        <details>
+          <summary>Do you go up on roofs?</summary>
+          <p>No. For safety, I only rake roofs from the ground with a long-handled roof rake. For steep or high roofs, I'll refer you to a pro.</p>
+        </details>
+        <details>
+          <summary>How do I pay?</summary>
+          <p>Per-storm visits are paid after the work, by cash, Venmo, or check. Season plans are paid up front, or in two payments (half by Nov 15, half by Jan 15).</p>
+        </details>
+        <details>
+          <summary>What if you're sick or away?</summary>
+          <p>I have a trusted backup helper for busy storms and days I can't make it. You'll always get a text letting you know who's coming and when.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="contact">
+        <div>
+          <p class="eyebrow">Get on the list</p>
+          <h2>Let's get you dug out.</h2>
+          <p>Send a request and I'll text you back, usually the same day after school.</p>
+          <ul class="contact-list">
+            <li><span>Call / Text</span><a data-phone href="#">(207) 000-0000</a></li>
+            <li><span>Email</span><a data-email href="#">you@example.com</a></li>
+            <li><span>Hours</span>Weekdays 2:30–8 PM · Weekends all day</li>
+          </ul>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <label>Name<input name="name" required autocomplete="name" /></label>
+          <label>Phone<input name="phone" type="tel" required autocomplete="tel" /></label>
+          <label>Street address<input name="address" required autocomplete="street-address" placeholder="e.g. 12 Main St, Auburn" /></label>
+          <label>I'm interested in
+            <select name="interest">
+              <option>Season plan</option>
+              <option>Per-storm service</option>
+              <option>One-time cleanup</option>
+              <option>Roof raking</option>
+            </select>
+          </label>
+          <label>Anything I should know?<textarea name="notes" rows="3" placeholder="Driveway size, parking, dogs, gate code..."></textarea></label>
+          <button type="submit" class="btn btn-block">Send Request</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="assets/logo.jpg" alt="North Scape Services" class="brand-logo" />
-        <div>
-          <p class="footer-name">North<span class="accent">Scape</span> Services</p>
-          <p class="footer-tag">Expect Excellence · Auburn, ME</p>
-        </div>
+      <div class="brand">
+        <img src="assets/logo.svg" alt="" class="brand-logo" width="32" height="32" />
+        <span class="brand-text">
+          <span class="brand-name">Clear Path Snow Co.</span>
+          <span class="brand-sub">Student-run snow removal · Auburn, Maine</span>
+        </span>
       </div>
-      <div class="footer-cols">
-        <div>
-          <p class="foot-h">Contact</p>
-          <a href="tel:+12074024203">(207) 402-4203</a>
-          <a href="mailto:servicenorthscape@gmail.com">servicenorthscape@gmail.com</a>
-        </div>
-        <div>
-          <p class="foot-h">Serving</p>
-          <span>Auburn</span>
-          <span>Lewiston</span>
-          <span>Poland · Minot · Turner</span>
-        </div>
-        <div>
-          <p class="foot-h">Hours</p>
-          <span>Mon – Sat · 7am – 7pm</span>
-          <span>Sun by request</span>
-        </div>
-      </div>
+      <p class="small">© <span id="year"></span> Clear Path Snow Co. Residential service only.</p>
     </div>
-    <p class="footer-copy">© <span id="year"></span> North Scape Services · Owned by Chance Perreault · Auburn, Maine</p>
   </footer>
 
   <script src="main.js"></script>

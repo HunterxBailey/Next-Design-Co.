@@ -1,484 +1,176 @@
-/* ============================================================
-   North Scape Services — main.js
-   Interactive + 3D: Three.js leaf-swirl hero, tilt cards,
-   scroll parallax, magnetic buttons, counters, ambient audio-ready.
-   ============================================================ */
+/* ==========================================================================
+   Clear Path Snow Co. — site behavior
+   Edit CONFIG below with your real info. Everything else updates itself.
+   ========================================================================== */
 
-(function () {
-  'use strict';
+const CONFIG = {
+  ownerName: "the owner",        // e.g. "Alex"
+  phone: "(207) 000-0000",       // your cell, for calls and texts
+  email: "you@example.com",      // where quote requests are sent
+  seasonSpotsTotal: 12,          // how many season clients you can handle
+  seasonSpotsTaken: 0,           // bump this as people sign up
+};
 
-  const $  = (sel, ctx = document) => ctx.querySelector(sel);
-  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PRICES = {
+  storm:  { small: 25,  medium: 35,  large: 50 },
+  season: { small: 300, medium: 425, large: 575 },
+  // Add-ons are per visit; on a season plan they're multiplied by ~12 storms.
+  addon:  { walk: 10, car: 10, salt: 5 },
+  stormsPerSeason: 12,
+};
 
-  /* =========================================================
-     NAV — scrolled state + mobile toggle
-     ========================================================= */
-  const nav = $('#nav');
-  const navToggle = $('#navToggle');
-  const navLinks  = $('.nav-links');
+/* ---- Fill in contact details ------------------------------------------ */
+const digits = CONFIG.phone.replace(/\D/g, "");
+document.querySelectorAll("[data-phone]").forEach((a) => {
+  a.textContent = CONFIG.phone;
+  a.href = `sms:+1${digits}`;
+});
+document.querySelectorAll("[data-email]").forEach((a) => {
+  a.textContent = CONFIG.email;
+  a.href = `mailto:${CONFIG.email}`;
+});
+document.querySelectorAll("[data-owner]").forEach((el) => {
+  el.textContent = CONFIG.ownerName;
+});
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  const onScroll = () => {
-    if (window.scrollY > 30) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+/* ---- Season spots meter ------------------------------------------------ */
+const left = Math.max(0, CONFIG.seasonSpotsTotal - CONFIG.seasonSpotsTaken);
+document.getElementById("spotsLeft").textContent = left;
+document.getElementById("spotsTotal").textContent = CONFIG.seasonSpotsTotal;
+requestAnimationFrame(() => {
+  const pct = (CONFIG.seasonSpotsTaken / CONFIG.seasonSpotsTotal) * 100;
+  document.getElementById("spotsFill").style.width = `${Math.max(4, pct)}%`;
+});
 
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      navToggle.classList.toggle('open', open);
-      navToggle.setAttribute('aria-expanded', String(open));
-    });
-    $$('.nav-links a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        navToggle.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
+/* ---- Mobile nav -------------------------------------------------------- */
+const nav = document.getElementById("nav");
+const toggle = document.getElementById("navToggle");
+toggle.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(open));
+});
+document.querySelectorAll(".nav-links a").forEach((a) =>
+  a.addEventListener("click", () => {
+    nav.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  })
+);
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 20);
+}, { passive: true });
+
+/* ---- Estimator --------------------------------------------------------- */
+const est = document.getElementById("estimator");
+let lastEstimate = "";
+
+function updateEstimate() {
+  const size = est.querySelector('input[name="size"]:checked').value;
+  const plan = est.querySelector('input[name="plan"]:checked').value;
+  const addons = [...est.querySelectorAll('input[name="addon"]:checked')].map((i) => i.value);
+  const perVisitAddons = addons.reduce((sum, a) => sum + PRICES.addon[a], 0);
+
+  let price, label, note;
+  if (plan === "season") {
+    price = PRICES.season[size] + perVisitAddons * PRICES.stormsPerSeason;
+    label = "Estimated season total";
+    note = `Nov 15 – Apr 1, every storm of 2"+. About $${Math.round(price / PRICES.stormsPerSeason)} per storm over a typical season.`;
+  } else {
+    price = PRICES.storm[size] + perVisitAddons;
+    label = "Estimated per storm";
+    note = `Based on a typical Auburn storm under 8". Storms over 12" are +50%.`;
+  }
+  const plus = size === "large" ? "+" : "";
+  document.getElementById("estimateLabel").textContent = label;
+  document.getElementById("estimatePrice").textContent = `$${price}${plus}`;
+  document.getElementById("estimateNote").textContent = note;
+
+  const sizeName = { small: "1-car", medium: "2-car", large: "large/long" }[size];
+  lastEstimate = `Estimate: ${sizeName} driveway, ${plan === "season" ? "season plan" : "per storm"}` +
+    (addons.length ? ` + ${addons.join(", ")}` : "") + ` = $${price}${plus}`;
+}
+est.addEventListener("change", updateEstimate);
+updateEstimate();
+
+document.getElementById("estimateCta").addEventListener("click", () => {
+  const notes = document.querySelector('#contactForm [name="notes"]');
+  if (!notes.value.includes("Estimate:")) {
+    notes.value = (notes.value ? notes.value + "\n" : "") + lastEstimate;
+  }
+  const plan = est.querySelector('input[name="plan"]:checked').value;
+  document.querySelector('#contactForm [name="interest"]').value =
+    plan === "season" ? "Season plan" : "Per-storm service";
+});
+
+/* ---- Contact form → prefilled email ------------------------------------ */
+document.getElementById("contactForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const subject = `Snow removal request: ${f.get("name")} (${f.get("interest")})`;
+  const body = [
+    `Name: ${f.get("name")}`,
+    `Phone: ${f.get("phone")}`,
+    `Address: ${f.get("address")}`,
+    `Interested in: ${f.get("interest")}`,
+    "",
+    f.get("notes") || "",
+  ].join("\n");
+  window.location.href =
+    `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  document.getElementById("formStatus").textContent =
+    `Your email app should open with the request filled in. If it doesn't, text ${CONFIG.phone}.`;
+});
+
+/* ---- Snowfall ---------------------------------------------------------- */
+(function snow() {
+  const canvas = document.getElementById("snow");
+  const ctx = canvas.getContext("2d");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let w, h, flakes;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.round(Math.min(160, (w * h) / 9000));
+    flakes = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2.2 + 0.6,
+      s: Math.random() * 0.8 + 0.35,
+      d: Math.random() * Math.PI * 2,
+    }));
   }
 
-  /* =========================================================
-     REVEAL on scroll
-     ========================================================= */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-  $$('[data-reveal]').forEach((el, i) => {
-    el.style.transitionDelay = (i % 6) * 0.05 + 's';
-    io.observe(el);
-  });
-
-  /* =========================================================
-     3D INTERACTIVE HERO — Three.js
-     - Instanced autumn leaves swirling in 3D
-     - Grass-blade field on ground plane
-     - Mouse parallax + scroll-driven camera
-     - Center 3D logo card that reacts to pointer
-     ========================================================= */
-  const canvas = document.getElementById('three-canvas');
-  const heroSection = document.querySelector('.hero');
-  let renderer, scene, camera, clock, leafGroup, grassGroup, logoDisk;
-  const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
-  const scrollProgress = { v: 0 };
-
-  function init3D () {
-    if (!canvas || !window.THREE) return;
-
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(window.innerWidth, window.innerHeight, false);
-    renderer.setClearColor(0x000000, 0);
-
-    scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0e100e, 0.045);
-
-    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 1.6, 8);
-
-    // Lights
-    const ambient = new THREE.AmbientLight(0xffffff, 0.55);
-    scene.add(ambient);
-
-    const key = new THREE.DirectionalLight(0x9dffb7, 1.15);
-    key.position.set(4, 6, 5);
-    scene.add(key);
-
-    const rim = new THREE.DirectionalLight(0x23c552, 0.85);
-    rim.position.set(-6, 3, -4);
-    scene.add(rim);
-
-    const warm = new THREE.PointLight(0xffb066, 1.4, 30);
-    warm.position.set(-3, 2, 4);
-    scene.add(warm);
-
-    /* ---- Ground plane with subtle grid glow ---- */
-    const groundGeo = new THREE.PlaneGeometry(80, 80, 1, 1);
-    const groundMat = new THREE.MeshStandardMaterial({
-      color: 0x121812,
-      roughness: 0.95,
-      metalness: 0,
-    });
-    const ground = new THREE.Mesh(groundGeo, groundMat);
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -2.2;
-    scene.add(ground);
-
-    /* ---- Grass blade field ---- */
-    grassGroup = new THREE.Group();
-    const bladeGeom = new THREE.ConeGeometry(0.06, 0.55, 4);
-    const bladeMat = new THREE.MeshStandardMaterial({
-      color: 0x23c552, roughness: 0.7, metalness: 0.1,
-      emissive: 0x0f7a37, emissiveIntensity: 0.15,
-    });
-    const bladeInstances = 380;
-    const grass = new THREE.InstancedMesh(bladeGeom, bladeMat, bladeInstances);
-    const dummy = new THREE.Object3D();
-    for (let i = 0; i < bladeInstances; i++) {
-      const r = 3 + Math.random() * 18;
-      const t = Math.random() * Math.PI * 2;
-      dummy.position.set(Math.cos(t) * r, -2.1 + Math.random() * 0.05, Math.sin(t) * r);
-      dummy.rotation.set(
-        (Math.random() - 0.5) * 0.4,
-        Math.random() * Math.PI,
-        (Math.random() - 0.5) * 0.35
-      );
-      const s = 0.7 + Math.random() * 1.6;
-      dummy.scale.set(s * 0.9, s, s * 0.9);
-      dummy.updateMatrix();
-      grass.setMatrixAt(i, dummy.matrix);
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "rgba(234, 246, 255, 0.85)";
+    for (const f of flakes) {
+      ctx.globalAlpha = 0.35 + f.r / 4;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fill();
     }
-    grassGroup.add(grass);
-    scene.add(grassGroup);
-
-    /* ---- Autumn LEAVES (instanced) ---- */
-    leafGroup = new THREE.Group();
-    const leafShape = new THREE.Shape();
-    leafShape.moveTo(0, -0.5);
-    leafShape.bezierCurveTo(0.55, -0.15, 0.55, 0.35, 0, 0.6);
-    leafShape.bezierCurveTo(-0.55, 0.35, -0.55, -0.15, 0, -0.5);
-    const leafGeom = new THREE.ExtrudeGeometry(leafShape, {
-      steps: 1, depth: 0.02, bevelEnabled: true, bevelThickness: 0.02,
-      bevelSize: 0.02, bevelSegments: 2
-    });
-    leafGeom.center();
-    leafGeom.scale(0.7, 0.7, 0.7);
-
-    const palette = [0xc25e2a, 0xe5a54b, 0xd6873a, 0x8a6b2a, 0x23c552, 0x3f8b45];
-    const leafCount = 90;
-    const leafData = [];
-    for (let i = 0; i < leafCount; i++) {
-      const mat = new THREE.MeshStandardMaterial({
-        color: palette[i % palette.length],
-        roughness: 0.6,
-        metalness: 0.05,
-        side: THREE.DoubleSide,
-      });
-      const m = new THREE.Mesh(leafGeom, mat);
-      const r = 2 + Math.random() * 9;
-      const a = Math.random() * Math.PI * 2;
-      m.position.set(Math.cos(a) * r, 4 + Math.random() * 8, Math.sin(a) * r - 2);
-      m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-      const s = 0.6 + Math.random() * 0.8;
-      m.scale.setScalar(s);
-      leafGroup.add(m);
-      leafData.push({
-        mesh: m,
-        base: m.position.clone(),
-        speed: 0.15 + Math.random() * 0.35,
-        wob: Math.random() * Math.PI * 2,
-        spin: {
-          x: (Math.random() - 0.5) * 0.02,
-          y: (Math.random() - 0.5) * 0.03,
-          z: (Math.random() - 0.5) * 0.02,
-        },
-        drift: (Math.random() - 0.5) * 0.6,
-      });
-    }
-    scene.add(leafGroup);
-
-    /* ---- Central 3D "logo disk" (green ring + shield) ---- */
-    logoDisk = new THREE.Group();
-    logoDisk.position.set(0, 1.4, 1.4);
-
-    const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(1.5, 0.045, 24, 128),
-      new THREE.MeshStandardMaterial({
-        color: 0x23c552, roughness: 0.35, metalness: 0.6,
-        emissive: 0x117a35, emissiveIntensity: 0.55,
-      })
-    );
-    ring.rotation.x = Math.PI / 2.3;
-    logoDisk.add(ring);
-
-    const ring2 = new THREE.Mesh(
-      new THREE.TorusGeometry(1.85, 0.012, 12, 128),
-      new THREE.MeshStandardMaterial({
-        color: 0x23c552, transparent: true, opacity: 0.6,
-        emissive: 0x117a35, emissiveIntensity: 0.7,
-      })
-    );
-    ring2.rotation.x = Math.PI / 2.3;
-    logoDisk.add(ring2);
-
-    // Shield-ish plate in center
-    const shield = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.05, 1.05, 0.06, 6),
-      new THREE.MeshStandardMaterial({
-        color: 0x1a1c1a, roughness: 0.35, metalness: 0.7,
-        emissive: 0x0a0b0a, emissiveIntensity: 0.4,
-      })
-    );
-    shield.rotation.x = Math.PI / 2;
-    logoDisk.add(shield);
-
-    // "N" mark using a simple extrusion
-    const nShape = new THREE.Shape();
-    nShape.moveTo(-0.42, -0.55);
-    nShape.lineTo(-0.42, 0.55);
-    nShape.lineTo(-0.2, 0.55);
-    nShape.lineTo(0.2, -0.1);
-    nShape.lineTo(0.2, 0.55);
-    nShape.lineTo(0.42, 0.55);
-    nShape.lineTo(0.42, -0.55);
-    nShape.lineTo(0.2, -0.55);
-    nShape.lineTo(-0.2, 0.1);
-    nShape.lineTo(-0.2, -0.55);
-    nShape.closePath();
-    const nGeom = new THREE.ExtrudeGeometry(nShape, {
-      depth: 0.12, bevelEnabled: true, bevelThickness: 0.03,
-      bevelSize: 0.03, bevelSegments: 2
-    });
-    nGeom.center();
-    const nMat = new THREE.MeshStandardMaterial({
-      color: 0x23c552, roughness: 0.35, metalness: 0.5,
-      emissive: 0x117a35, emissiveIntensity: 0.7,
-    });
-    const nMesh = new THREE.Mesh(nGeom, nMat);
-    nMesh.position.z = 0.06;
-    logoDisk.add(nMesh);
-
-    scene.add(logoDisk);
-
-    // Store leaves for animation loop
-    scene.userData.leafData = leafData;
-
-    clock = new THREE.Clock();
-    animate();
+    ctx.globalAlpha = 1;
   }
 
-  function animate () {
-    if (!renderer) return;
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-
-    // Smooth pointer
-    pointer.x += (pointer.tx - pointer.x) * 0.05;
-    pointer.y += (pointer.ty - pointer.y) * 0.05;
-
-    // Camera parallax + scroll
-    const scrollY = window.scrollY;
-    const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
-    scrollProgress.v = Math.min(1, scrollY / heroH);
-
-    camera.position.x = pointer.x * 1.4;
-    camera.position.y = 1.6 + pointer.y * 0.6 - scrollProgress.v * 1.2;
-    camera.position.z = 8 - scrollProgress.v * 3;
-    camera.lookAt(0, 1.2 - scrollProgress.v * 0.8, 0);
-
-    // Logo disk spin + wobble
-    if (logoDisk) {
-      logoDisk.rotation.y = t * 0.35 + pointer.x * 0.6;
-      logoDisk.rotation.x = Math.sin(t * 0.6) * 0.06 + pointer.y * 0.3;
-      logoDisk.position.y = 1.4 + Math.sin(t * 1.1) * 0.12;
+  function step() {
+    for (const f of flakes) {
+      f.d += 0.01;
+      f.y += f.s + f.r * 0.15;
+      f.x += Math.sin(f.d) * 0.35;
+      if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; }
+      if (f.x > w + 4) f.x = -4;
+      if (f.x < -4) f.x = w + 4;
     }
-
-    // Leaves
-    const leafData = scene.userData.leafData || [];
-    for (let i = 0; i < leafData.length; i++) {
-      const L = leafData[i];
-      const m = L.mesh;
-      m.position.y = L.base.y - ((t * L.speed) % 12);
-      if (m.position.y < -2) {
-        L.base.y += 12;
-      }
-      m.position.x = L.base.x + Math.sin(t * 0.6 + L.wob) * (0.8 + L.drift);
-      m.position.z = L.base.z + Math.cos(t * 0.5 + L.wob) * (0.8 + L.drift);
-      m.rotation.x += L.spin.x;
-      m.rotation.y += L.spin.y;
-      m.rotation.z += L.spin.z;
-    }
-
-    // Grass sway
-    if (grassGroup) {
-      grassGroup.rotation.z = Math.sin(t * 0.6) * 0.008;
-    }
-
-    renderer.render(scene, camera);
+    draw();
+    requestAnimationFrame(step);
   }
 
-  function onResize () {
-    if (!renderer) return;
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight, false);
-  }
-
-  window.addEventListener('mousemove', (e) => {
-    pointer.tx = (e.clientX / window.innerWidth) * 2 - 1;
-    pointer.ty = -((e.clientY / window.innerHeight) * 2 - 1);
-  });
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches[0]) {
-      pointer.tx = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
-      pointer.ty = -((e.touches[0].clientY / window.innerHeight) * 2 - 1);
-    }
-  }, { passive: true });
-  window.addEventListener('resize', onResize);
-
-  // Try init after THREE loads
-  function boot3D () {
-    if (prefersReduced) return;
-    if (window.THREE) init3D();
-    else setTimeout(boot3D, 60);
-  }
-  boot3D();
-
-  /* =========================================================
-     TILT — cards react to pointer (3D transform)
-     ========================================================= */
-  const tiltEls = $$('[data-tilt], .service-card, .price-card, .business-card, .fall-card, .hero-logo-wrap');
-  tiltEls.forEach(el => {
-    let raf = null;
-    let rectCache = null;
-    el.style.transformStyle = 'preserve-3d';
-    el.style.willChange = 'transform';
-
-    const enter = () => { rectCache = el.getBoundingClientRect(); };
-    const move = (e) => {
-      if (!rectCache) rectCache = el.getBoundingClientRect();
-      const x = (e.clientX - rectCache.left) / rectCache.width;
-      const y = (e.clientY - rectCache.top) / rectCache.height;
-      const rx = (0.5 - y) * 10;
-      const ry = (x - 0.5) * 14;
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const baseTransform = el.dataset.baseTransform || '';
-        el.style.transform =
-          `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px) ${baseTransform}`;
-      });
-    };
-    const leave = () => {
-      if (raf) cancelAnimationFrame(raf);
-      rectCache = null;
-      el.style.transform = '';
-    };
-    el.addEventListener('mouseenter', enter);
-    el.addEventListener('mousemove', move);
-    el.addEventListener('mouseleave', leave);
-  });
-
-  /* =========================================================
-     MAGNETIC BUTTONS
-     ========================================================= */
-  $$('.btn').forEach(btn => {
-    let rect = null;
-    btn.addEventListener('mouseenter', () => { rect = btn.getBoundingClientRect(); });
-    btn.addEventListener('mousemove', (e) => {
-      if (!rect) rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.28}px) translateY(-2px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      rect = null;
-      btn.style.transform = '';
-    });
-  });
-
-  /* =========================================================
-     Number counters
-     ========================================================= */
-  const counters = $$('[data-count]');
-  const counterIO = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const to = parseFloat(el.dataset.count);
-      const dur = 1200;
-      const start = performance.now();
-      const from = 0;
-      const tick = (now) => {
-        const p = Math.min(1, (now - start) / dur);
-        const eased = 1 - Math.pow(1 - p, 3);
-        const val = from + (to - from) * eased;
-        el.textContent = Number.isInteger(to) ? Math.round(val) : val.toFixed(1);
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-      counterIO.unobserve(el);
-    });
-  }, { threshold: 0.4 });
-  counters.forEach(c => counterIO.observe(c));
-
-  /* =========================================================
-     Contact form → mailto stub
-     ========================================================= */
-  const form = $('#quoteForm');
-  const note = $('#formNote');
-  if (form && note) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const name = (data.get('name') || '').toString().trim();
-      const phone = (data.get('phone') || '').toString().trim();
-      const service = (data.get('service') || '').toString().trim();
-      if (!name || !phone || !service) {
-        note.textContent = 'Please fill in your name, phone, and the service you need.';
-        note.style.color = '#e5a54b';
-        return;
-      }
-      const address = (data.get('address') || '').toString().trim();
-      const email   = (data.get('email') || '').toString().trim();
-      const notes   = (data.get('notes') || '').toString().trim();
-
-      const subj = `Quote request — ${service} — ${name}`;
-      const body = [
-        `Name: ${name}`,
-        `Phone: ${phone}`,
-        email ? `Email: ${email}` : null,
-        address ? `Address: ${address}` : null,
-        `Service: ${service}`,
-        notes ? `\nNotes:\n${notes}` : null,
-        `\n— Sent from northscapeservices site`
-      ].filter(Boolean).join('\n');
-      const mailto = `mailto:servicenorthscape@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
-
-      note.style.color = '#23c552';
-      note.textContent = 'Thanks — opening your email so you can send this to Chance…';
-      window.setTimeout(() => { window.location.href = mailto; }, 350);
-      form.reset();
-    });
-  }
-
-  /* =========================================================
-     Footer year
-     ========================================================= */
-  const yearEl = $('#year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* =========================================================
-     Smooth focus after in-page nav
-     ========================================================= */
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    const id = a.getAttribute('href').slice(1);
-    if (!id) return;
-    const target = document.getElementById(id);
-    if (!target) return;
-    window.setTimeout(() => {
-      target.setAttribute('tabindex', '-1');
-      target.focus({ preventScroll: true });
-    }, 500);
-  });
-
-  /* =========================================================
-     Loader dismiss
-     ========================================================= */
-  window.addEventListener('load', () => {
-    const loader = $('#loader');
-    if (loader) {
-      loader.classList.add('done');
-      setTimeout(() => loader.remove(), 900);
-    }
-  });
+  resize();
+  window.addEventListener("resize", resize);
+  if (reduce) draw(); else step();
 })();
