@@ -12,22 +12,45 @@ schedule.
 - **Website:** a single page with services, school-day storm schedule,
   pricing, instant estimator, service area, FAQ, and contact form.
 
+## Printables
+
+- **Flyer:** [`print/flyer.html`](print/flyer.html) is a US Letter flyer with
+  8 tear-off phone tabs. Ready to print: [`print/flyer.pdf`](print/flyer.pdf).
+- **Season agreement:** [`print/season-agreement.html`](print/season-agreement.html)
+  is 2 pages: an order form (driveway size, add-ons, payment, property notes)
+  plus plain-English terms and signature lines for the client, you, and a
+  parent/guardian co-signer. Ready to print:
+  [`print/season-agreement.pdf`](print/season-agreement.pdf).
+
+Print at 100% scale ("Actual size") with headers and footers turned off. The
+agreement is a template, not legal advice, so have a parent read it first.
+
 ## Make it yours
 
-Open `main.js` and edit the `CONFIG` block at the top:
+All business info is in **`config.js`**. The website, flyer, and agreement
+all read from it:
 
 ```js
 const CONFIG = {
-  ownerName: "the owner",   // your first name
-  phone: "(207) 000-0000",  // your cell
-  email: "you@example.com", // where requests go
+  ownerName: "Hunter",
+  ownerFullName: "Hunter Bailey",
+  phone: "(207) 346-1691",
+  email: "hunterlbailey2020@icloud.com",
+  siteUrl: "",              // set once published to add a QR code to the flyer
+  seasonStart: "November 15, 2026",
+  seasonEnd: "April 1, 2027",
+  earlyBirdDeadline: "November 1",
   seasonSpotsTotal: 12,     // max season clients
   seasonSpotsTaken: 0,      // update as people sign up
 };
 ```
 
-Prices appear in two places: the text in `index.html` (pricing section)
-and the `PRICES` block in `main.js` (used by the estimator). Update both.
+Prices are in the `PRICES` block in the same file. They drive the
+estimator, the flyer, and the agreement. The pricing section text in
+`index.html` is written out by hand, so update it too if prices change.
+
+The PDFs are snapshots. After you change `config.js`, open the HTML version
+and print it (or "Save as PDF") to get an updated copy.
 
 ## Stack
 
@@ -47,6 +70,9 @@ Then visit http://localhost:8000
 
 - `index.html` — page structure
 - `styles.css` — winter navy / ice blue / safety orange theme, responsive layout
-- `main.js` — config, estimator, contact form, mobile nav, snowfall
+- `config.js` — your name, contact info, season dates, and prices
+- `main.js` — estimator, contact form, mobile nav, snowfall
+- `print/` — flyer and season agreement (HTML + PDF), shared print styles
 - `assets/logo.svg` — snowflake logo and favicon
+- `assets/vendor/qrcode.js` — QR code generator for the flyer (MIT, Kazuhiko Arase)
 - `BUSINESS_PLAN.md` — the business side

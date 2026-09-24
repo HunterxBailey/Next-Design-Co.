@@ -42,8 +42,8 @@ shovel, and most plowing companies don't want small 1–2 car driveways.
 - Season plans are paid **up front**, or half by Nov 15 and half by Jan 15.
 - **Never work on a roof.** Rake only from the ground.
 
-To change prices, edit the page text in `index.html` and the `PRICES` block
-in `main.js`. They're kept separate on purpose, so update both.
+To change prices, edit the `PRICES` block in `config.js` (it updates the
+estimator, flyer, and agreement) and the pricing text in `index.html`.
 
 ---
 
@@ -72,7 +72,7 @@ The rest get done in the afternoon (2:30–8:00).
 - **With a snowblower:** 12–15 season clients
 - Keep **3–5 per-storm customers** on a waitlist to fill gaps.
 
-Set this on the site in `main.js` under `seasonSpotsTotal`. The default is
+Set this in `config.js` under `seasonSpotsTotal`. The default is
 12. As people sign up, raise `seasonSpotsTaken` and the "spots open" meter
 updates.
 
@@ -146,10 +146,11 @@ This isn't legal or tax advice. Go through it with a parent or guardian.
       business liability policy or rider makes sense. A homeowner's policy
       usually does **not** cover business work. This matters if someone
       slips on a walkway you cleared.
-- [ ] **Written season agreement.** A one-page agreement listing the
-      address, what's cleared, the 2" trigger, the season dates, the price
-      and payment dates, and that you're not responsible for ice that
-      forms after you leave.
+- [x] **Written season agreement.** Ready in `print/season-agreement.html`
+      (and `.pdf`). It covers the address, what's cleared, the 2" trigger,
+      the season dates, price and payment, ice after you leave, missed
+      storms, ending early, and a parent/guardian co-signature. Have a
+      parent read it before your first client signs.
 - [ ] **Safety.** Lift with your legs, take breaks, wear cleats and a
       reflective vest in the dark, never put hands in a snowblower chute
       (use the clean-out tool), and stay off roofs.
@@ -176,8 +177,9 @@ This isn't legal or tax advice. Go through it with a parent or guardian.
 
 1. **Start with people you know:** neighbors, family friends, parents'
    coworkers, teachers, church, or team families.
-2. **Flyers** on doors in 2–3 neighborhoods close to home. Include the site
-   link, phone number, and "Season spots limited."
+2. **Flyers** (`print/flyer.pdf`) on community boards (library, grocery
+   stores, laundromats) and handed to neighbors in 2–3 areas close to
+   home. Don't put flyers in mailboxes, since that's against federal law.
 3. **Local Facebook groups** (Auburn / L-A community groups) and **Nextdoor**.
    Post once in October and again before the first storm.
 4. **Offer an early-bird deal:** $25 off a season plan if booked before
@@ -190,12 +192,12 @@ This isn't legal or tax advice. Go through it with a parent or guardian.
 
 ## 9. First-week to-do list
 
-- [ ] Put your real name, phone, and email in `main.js` (`CONFIG`)
+- [x] Put your real name, phone, and email in `config.js`
 - [ ] Publish the site (GitHub Pages, Netlify, or similar)
 - [ ] Buy the "Yes" equipment from the startup list
-- [ ] Write the one-page season agreement
+- [x] Season agreement drafted (`print/season-agreement.pdf`); have a parent review it
 - [ ] Open the business bank account with a parent
 - [ ] Contact the Auburn City Clerk and your insurance agent
-- [ ] Print flyers and post in local groups
+- [ ] Print flyers (`print/flyer.pdf`) and post in local groups
 - [ ] Make a client spreadsheet: name, address, phone, plan, paid?, notes
 - [ ] Plan your morning route order by street

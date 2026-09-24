@@ -1,23 +1,7 @@
 /* ==========================================================================
    Clear Path Snow Co. — site behavior
-   Edit CONFIG below with your real info. Everything else updates itself.
+   Business info and prices live in config.js.
    ========================================================================== */
-
-const CONFIG = {
-  ownerName: "the owner",        // e.g. "Alex"
-  phone: "(207) 000-0000",       // your cell, for calls and texts
-  email: "you@example.com",      // where quote requests are sent
-  seasonSpotsTotal: 12,          // how many season clients you can handle
-  seasonSpotsTaken: 0,           // bump this as people sign up
-};
-
-const PRICES = {
-  storm:  { small: 25,  medium: 35,  large: 50 },
-  season: { small: 300, medium: 425, large: 575 },
-  // Add-ons are per visit; on a season plan they're multiplied by ~12 storms.
-  addon:  { walk: 10, car: 10, salt: 5 },
-  stormsPerSeason: 12,
-};
 
 /* ---- Fill in contact details ------------------------------------------ */
 const digits = CONFIG.phone.replace(/\D/g, "");

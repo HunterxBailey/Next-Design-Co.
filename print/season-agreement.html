@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Season Agreement — Clear Path Snow Co.</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="print.css" />
+  <style>
+    .page { padding: 0.45in 0.6in 0.5in; font-size: 12.5px; line-height: 1.45; }
+
+    .doc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--navy);
+      margin-bottom: 12px;
+    }
+    .doc-head h1 { font-size: 26px; line-height: 1.1; }
+    .doc-head .season { font-size: 13px; font-weight: 700; color: var(--ice); margin-top: 3px; }
+    .provider { text-align: right; font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .provider b { color: var(--ink); }
+
+    h2 {
+      font-size: 15px;
+      margin: 13px 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--rule);
+    }
+    h2 .num {
+      display: inline-grid;
+      place-items: center;
+      width: 20px; height: 20px;
+      margin-right: 6px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 11px;
+      vertical-align: 1px;
+    }
+
+    .fields { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 10px 20px; }
+    .field .line { border-bottom: 1px solid var(--ink); height: 22px; }
+    .field .cap { font-size: 10.5px; color: var(--muted); margin-top: 3px; }
+    .field.wide { grid-column: span 2; }
+
+    .opts { width: 100%; border-collapse: collapse; }
+    .opts td { padding: 4px 4px; border-bottom: 1px solid #e6ebf0; vertical-align: top; }
+    .opts td:last-child { text-align: right; white-space: nowrap; font-weight: 700; width: 1.4in; }
+    .opts .group td {
+      padding-top: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ice);
+      border-bottom: 0;
+    }
+    .opts small { color: var(--muted); }
+    .box {
+      display: inline-block;
+      width: 13px; height: 13px;
+      border: 1.5px solid var(--ink);
+      border-radius: 2px;
+      margin-right: 8px;
+      vertical-align: -2px;
+    }
+    .blank { display: inline-block; min-width: 0.8in; border-bottom: 1px solid var(--ink); }
+    .total td {
+      border-top: 2px solid var(--navy);
+      border-bottom: 0;
+      padding-top: 10px;
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .total .blank { min-width: 1.1in; }
+
+    .pay { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+    .pay p { padding: 3px 0; }
+
+    .notes .line { border-bottom: 1px solid var(--ink); height: 24px; }
+
+    .terms { font-size: 12px; line-height: 1.42; counter-reset: term; margin: 0; padding: 0; list-style: none; }
+    .terms li {
+      counter-increment: term;
+      position: relative;
+      padding: 0 0 5px 22px;
+      break-inside: avoid;
+    }
+    .terms li::before {
+      content: counter(term) ".";
+      position: absolute;
+      left: 0;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .terms b { color: var(--navy); }
+
+    .sigs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-top: 6px; }
+    .sig { border: 1.5px solid var(--rule); border-radius: 10px; padding: 10px 12px 12px; }
+    .sig.full { grid-column: 1 / -1; }
+    .sig .who { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ice); margin-bottom: 4px; }
+    .sig .row { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+    .sig.full .row { grid-template-columns: 1.4fr 1.4fr 1fr 1fr; }
+    .sig .field .line { height: 26px; }
+    .sig .prefilled { height: 26px; display: flex; align-items: flex-end; padding-bottom: 3px; font-weight: 700; border-bottom: 1px solid var(--ink); }
+
+    .foot {
+      position: absolute;
+      left: 0.6in; right: 0.6in; bottom: 0.35in;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <p>
+      <strong>Season agreement, 2 pages, US Letter.</strong> Print one copy for each client
+      (double-sided is fine) and give them a photo or copy after everyone signs. This is a
+      plain-English template, not legal advice. Have a parent or guardian read it before you use it.
+      <a href="flyer.html">← Flyer</a>
+    </p>
+    <button type="button" data-print>Print agreement</button>
+  </div>
+
+  <!-- PAGE 1: who, what, how much -->
+  <div class="sheet">
+    <div class="page">
+      <header class="doc-head">
+        <div>
+          <div class="brand-row" style="margin-bottom:10px">
+            <img src="../assets/logo.svg" alt="" />
+            <div>
+              <div class="name">Clear Path Snow Co.</div>
+              <div class="sub">Student-run snow removal · Auburn, Maine</div>
+            </div>
+          </div>
+          <h1>Season Snow Removal Agreement</h1>
+          <p class="season"><span data-season-start>November 15, 2026</span> – <span data-season-end>April 1, 2027</span></p>
+        </div>
+        <div class="provider">
+          <b>Provider:</b> <span data-owner-full>Hunter Bailey</span><br/>
+          Call / text: <span data-phone>(207) 346-1691</span><br/>
+          <span data-email>hunterlbailey2020@icloud.com</span>
+        </div>
+      </header>
+
+      <p>
+        This agreement is between <b>Clear Path Snow Co.</b> (owner <span data-owner-full>Hunter Bailey</span>,
+        called the <b>"Provider"</b>) and the homeowner or resident below (the <b>"Client"</b>).
+      </p>
+
+      <h2><span class="num">1</span>Client</h2>
+      <div class="fields">
+        <div class="field"><div class="line"></div><div class="cap">Client name</div></div>
+        <div class="field"><div class="line"></div><div class="cap">Cell phone (for storm-day texts)</div></div>
+        <div class="field"><div class="line"></div><div class="cap">Email (optional)</div></div>
+        <div class="field wide"><div class="line"></div><div class="cap">Service address, Auburn, ME</div></div>
+        <div class="field"><div class="line"></div><div class="cap">Need it cleared by (time), if any</div></div>
+      </div>
+
+      <h2><span class="num">2</span>Service &amp; season price</h2>
+      <table class="opts">
+        <tr class="group"><td colspan="2">Driveway (includes front walk &amp; steps) · pick one</td></tr>
+        <tr><td><span class="box"></span>1-car driveway</td><td data-price="season.small">$300</td></tr>
+        <tr><td><span class="box"></span>2-car driveway</td><td data-price="season.medium">$425</td></tr>
+        <tr><td><span class="box"></span>Large / long driveway <small>(price set after a look at the property)</small></td><td>$<span class="blank"></span></td></tr>
+
+        <tr class="group"><td colspan="2">Add-ons for the whole season</td></tr>
+        <tr><td><span class="box"></span>Extra walkway or back steps</td><td>+ <span data-season-addon="walk">$120</span></td></tr>
+        <tr><td><span class="box"></span>Car brush-off &nbsp;× <span class="blank" style="min-width:.35in"></span> cars</td><td>+ <span data-season-addon="car">$120</span> per car</td></tr>
+        <tr><td><span class="box"></span>Salt / ice melt after each visit &nbsp;<span class="box" style="margin-left:6px"></span>pet-safe</td><td>+ <span data-season-addon="salt">$60</span></td></tr>
+
+        <tr class="group"><td colspan="2">Discounts</td></tr>
+        <tr><td><span class="box"></span>Early bird: signed and paid (or first payment made) by <span data-early-bird>November 1</span></td><td>− <span data-price="earlyBirdDiscount">$25</span></td></tr>
+        <tr><td><span class="box"></span>Other: <span class="blank" style="min-width:2.2in"></span></td><td>− $<span class="blank" style="min-width:.6in"></span></td></tr>
+
+        <tr class="total"><td>Season total</td><td>$<span class="blank"></span></td></tr>
+      </table>
+
+      <h2><span class="num">3</span>Payment</h2>
+      <div class="pay">
+        <p><span class="box"></span>Paid in full by <span data-season-start>November 15, 2026</span></p>
+        <p><span class="box"></span>Cash</p>
+        <p><span class="box"></span>Two payments: half by Nov 15, half by Jan 15</p>
+        <p><span class="box"></span>Check, payable to <span class="blank" style="min-width:1.6in"></span></p>
+      </div>
+
+      <h2><span class="num">4</span>Property notes</h2>
+      <p class="cap" style="font-size:11px;color:var(--muted);margin-bottom:2px">Where to pile snow, where cars park, pets, gates, hidden steps or drains, anything fragile.</p>
+      <div class="notes">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+
+      <div class="foot"><span>Clear Path Snow Co. · Season Agreement</span><span>Page 1 of 2 · Terms and signatures on page 2</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: terms + signatures -->
+  <div class="sheet">
+    <div class="page">
+      <h2 style="margin-top:0"><span class="num">5</span>Terms, in plain English</h2>
+      <ol class="terms">
+        <li><b>Season.</b> Service runs from <span data-season-start>November 15, 2026</span> through <span data-season-end>April 1, 2027</span>.</li>
+        <li><b>What counts as a storm.</b> Provider clears the areas checked on page 1 after every snowfall of <b>2 inches or more</b>. Snowfall under 2 inches isn't included, but Client can ask for a visit at the per-storm rate.</li>
+        <li><b>When service happens.</b> Provider is a full-time high school student and works weekdays <b>5:00–7:15 AM</b> and <b>2:30–8:00 PM</b>, plus <b>any time on weekends and school snow days</b>. Overnight snow is usually cleared on the morning route, and snow that falls during school is cleared starting at 2:30 PM. Exact arrival times aren't guaranteed. Provider will text before and after each visit.</li>
+        <li><b>Big storms.</b> For storms over 12 inches, Provider will make one pass during the storm when it's safe and a final pass after it ends, at no extra charge.</li>
+        <li><b>Plow bank.</b> One return visit per storm to clear the pile the city plow leaves at the end of the driveway is included.</li>
+        <li><b>Flat price.</b> The season total stays the same no matter how many storms there are. There's no refund for a light winter and no extra charge for a heavy one.</li>
+        <li><b>Missed storms.</b> If Provider can't clear a qualifying storm, Client gets a refund or credit of that driveway's per-storm rate (<span data-price="storm.small">$25</span> 1-car, <span data-price="storm.medium">$35</span> 2-car, or as agreed for large). Provider may send a trusted backup helper and will text Client who is coming.</li>
+        <li><b>Client's part.</b> Before the first snow, Client will mark driveway edges, garden beds, and anything low (like drains or edging) with stakes or reflectors. Client will keep pets inside during visits, keep hoses, toys, and decorations out of the way, and tell Provider about hazards.</li>
+        <li><b>Ice.</b> Snow can melt and refreeze after Provider leaves. Provider applies ice melt only if checked on page 1. Client is responsible for watching for and treating ice between visits.</li>
+        <li><b>Safety.</b> Provider does not climb on roofs; any roof raking is done from the ground only. Provider may delay service during unsafe conditions (freezing rain, lightning, extreme cold, or dangerous roads) and will clear as soon as it's safe.</li>
+        <li><b>Care &amp; damage.</b> Provider will work carefully. Provider isn't responsible for damage to items that were buried under snow and not marked, or for damage caused by city plows. Client should tell Provider about any concern within 48 hours so it can be worked out fairly.</li>
+        <li><b>Where snow goes.</b> Snow is piled on Client's property, not pushed into the street or onto public sidewalks.</li>
+        <li><b>Photos.</b> Provider may take a photo of the cleared area after a visit as a record of service. No photos of people.</li>
+        <li><b>Ending early.</b> Either side can end this agreement early by written notice (a text counts). Provider will refund the amount paid minus the per-storm rate for each visit already completed.</li>
+        <li><b>Parent or guardian.</b> Provider is under 18. The parent or guardian signing below has read this agreement and co-signs it together with Provider.</li>
+      </ol>
+
+      <h2><span class="num">6</span>Signatures</h2>
+      <div class="sigs">
+        <div class="sig">
+          <div class="who">Client</div>
+          <div class="row">
+            <div class="field"><div class="line"></div><div class="cap">Signature</div></div>
+            <div class="field"><div class="line"></div><div class="cap">Date</div></div>
+          </div>
+          <div class="field" style="margin-top:8px"><div class="line"></div><div class="cap">Printed name</div></div>
+        </div>
+        <div class="sig">
+          <div class="who">Provider · Clear Path Snow Co.</div>
+          <div class="row">
+            <div class="field"><div class="line"></div><div class="cap">Signature</div></div>
+            <div class="field"><div class="line"></div><div class="cap">Date</div></div>
+          </div>
+          <div class="field" style="margin-top:8px"><div class="prefilled" data-owner-full>Hunter Bailey</div><div class="cap">Printed name</div></div>
+        </div>
+        <div class="sig full">
+          <div class="who">Provider's parent or guardian (co-signer)</div>
+          <div class="row">
+            <div class="field"><div class="line"></div><div class="cap">Signature</div></div>
+            <div class="field"><div class="line"></div><div class="cap">Printed name</div></div>
+            <div class="field"><div class="line"></div><div class="cap">Phone</div></div>
+            <div class="field"><div class="line"></div><div class="cap">Date</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot"><span>Questions? Call or text <span data-owner>Hunter</span> at <span data-phone>(207) 346-1691</span></span><span>Page 2 of 2</span></div>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="print.js"></script>
+</body>
+</html>

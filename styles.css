@@ -376,6 +376,14 @@ p { margin: 0 0 14px; }
   font-size: 15px;
 }
 
+.price-link {
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ice);
+}
+
 /* Estimator ------------------------------------------------------------ */
 .estimator {
   display: grid;
